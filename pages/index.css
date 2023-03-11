@@ -5,16 +5,22 @@
 @import url(../blocks/page/page.css);
 
 @import url(../blocks/header/header.css);
+@import url(../blocks/header/__logo/header__logo.css);
 
 @import url(../blocks/profile/profile.css);
-@import url(../blocks/profile/__file/profile__file.css);
+@import url(../blocks/profile/__title/profile__title.css);
+@import url(../blocks/profile/__subtitle/profile__subtitle.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
+@import url(../blocks/profile/__button-edit/profile__button-edit.css);
+@import url(../blocks/profile/__button-add/profile__button-add.css);
 
 @import url(../blocks/element/element.css);
+@import url(../blocks/element/__list-item/element__list-item.css);
+@import url(../blocks/element/__title/element__title.css);
+@import url(../blocks/element/__description/element__description.css);
 
 @import url(../blocks/elements/elements.css);
 @import url(../blocks/elements/__list/elements__list.css);
-@import url(../blocks/elements/__list-item/elements__list-item.css);
 
 @import url(../blocks/button__like/button__like.css);
 @import url(../blocks/button__like/__like-image/button__like-image.css);

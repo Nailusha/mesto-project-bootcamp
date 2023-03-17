@@ -16,10 +16,12 @@
             <main>
                 <section class="profile">
                     <img class="profile__avatar" src="./images/image.jpg" alt="Жак-Ив Кусто">
-                    <div>
-                    <h1 class="profile__title">Жак-Ив Кусто</h1>
-                    <button class="profile__button-edit"></button>
-                    <p class="profile__subtitle">Исследователь океана</p>
+                    <div class="profile__description">
+                        <div class="profile__block">
+                        <h1 class="profile__title">Жак-Ив Кусто</h1>
+                        <button class="profile__button-edit"></button>
+                        </div>
+                        <p class="profile__subtitle">Исследователь океана</p>
                     </div>
                     <button class="profile__button-add"></button>
                 </section>   
@@ -82,14 +84,15 @@
                         </li>
                     </ul>
                 </section>
+
                 <section class="popup">
                     <div class="popup__container">
                         <button class="button__close-icon"></button>
                         <form class="form">
                             <h2 class="form__title">Редактировать профиль</h2>
                             <fieldset class="form__input-container"> 
-                                <input class="form__input" type="text" value="Жак-Ив Кусто" name="author">
-                                <input class="form__input" type="text"  value="Исследователь океана" name="">
+                                <input class="form__input form__input_title" type="text" placeholder="Имя">
+                                <input class="form__input form__input_subtitle" type="text"  placeholder="О себе">
                             </fieldset>
                             <button>Сохранить</button>
                         </form>
@@ -101,5 +104,7 @@
                 <p class="footer__title">&COPY 2020 Mesto Russia</p>
             </footer>
         </div>
+        
+        <script src="./script/script.js"></script>
     </body>
 </html>

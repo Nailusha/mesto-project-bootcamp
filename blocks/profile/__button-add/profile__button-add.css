@@ -12,3 +12,21 @@
     cursor: pointer;
     position: relative;
 }
+.profile__button-add:hover {
+    opacity: .6;
+}
+@media (max-width: 930px) {
+    .profile__button-add {
+            width: 100px;
+            height: 40px;
+            background-size: 20px 20px;
+        }
+}
+@media (max-width: 620px) {
+    .profile__button-add {
+            width: 282px;
+            min-height: 50px;
+            padding: 2px 0 0 2px;
+            background-size: 16px 16px;
+        }
+}

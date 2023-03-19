@@ -1,5 +1,6 @@
 .form {
     min-width: 430px;
+    min-height: 330px;
     background-color: #FFFFFF;
     display: flex;
     flex-flow: column;

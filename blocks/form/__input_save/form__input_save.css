@@ -1,4 +1,17 @@
 .form__input_save {
-    background-color: #ffffff;
-    
+    margin: 0 calc((100vw - 320px)/(1280 - 320) * (36 - 22) + 22px);
+    width: calc((100vw - 320px)/(1280 - 320) * (358 - 238) + 238px);
+    height: calc((100vw - 320px)/(1280 - 320) * (50 - 46) + 46px);
+    background-color: rgb(0, 0, 0);
+    border: 0;
+    padding: 0;
+    color: #ffffff;
+    cursor: pointer;
+    position: relative;
+    margin-bottom: calc((100vw - 320px)/(1280 - 320) * (37 - 25) + 25px);
+    transition: all .2s ease-in-out;
+    border-radius: 2px;
+}
+.form__input_save:hover {
+    opacity: .8;
 }

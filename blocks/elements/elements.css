@@ -1,4 +1,15 @@
 .elements {
     max-width: 880px;
-    margin: 0 200px 0 200px;
+    margin: 0 auto 67px;
+}
+@media (max-width: 930px) {
+    .elements {
+            max-width: 581px;
+        }
+}
+@media (max-width: 620px) {
+    .elements {
+            max-width: 282px;
+            margin: 0 auto 48px;
+        }
 }

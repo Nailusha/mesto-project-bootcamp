@@ -4,3 +4,16 @@
     min-width: 880px;
     margin: 40px 200px 50px 200px;
 }
+@media (max-width: 930px) {
+    .profile {
+            max-width: 581px;
+        }
+}
+@media (max-width: 620px) {
+    .profile {
+            flex-flow: column;
+            align-items: center;
+            max-width: 282px;
+            margin: 0 auto 36px;
+        }
+}

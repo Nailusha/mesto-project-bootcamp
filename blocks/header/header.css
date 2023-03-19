@@ -4,3 +4,15 @@
     max-width: 880px;
     margin: 0 auto 40px;
 }
+
+@media (max-width: 930px) {
+    .header {
+            max-width: 581px;
+    }
+}
+@media (max-width: 620px) {
+    .header {
+            padding: 28px 0 28px;
+            margin: 0 auto 42px;
+    }
+}

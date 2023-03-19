@@ -11,18 +11,18 @@
     cursor: pointer;
     position: relative;
 }
-.profile__buttom-edit:hover {
+.profile__button-edit:hover {
     opacity: .6;
 }
 @media (max-width: 930px) {
-    .profile__buttom-edit {
+    .profile__button-edit {
             min-width: 22px;
             max-height: 22px;
             margin: 0 0 6px;
         }
 }
 @media (max-width: 620px) {
-    .profile__buttom-edit {
+    .profile__button-edit {
             min-width: 18px;
             max-width: 18px;
             max-height: 18px;

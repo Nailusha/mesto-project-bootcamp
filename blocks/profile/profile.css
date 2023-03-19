@@ -1,7 +1,7 @@
 .profile {
     display: flex;
     flex-direction: row;
-    min-width: 880px;
+    max-width: 880px;
     margin: 40px 200px 50px 200px;
 }
 @media (max-width: 930px) {

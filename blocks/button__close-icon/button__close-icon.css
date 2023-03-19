@@ -1,0 +1,6 @@
+.button__close-icon {
+    background-color: transparent;
+    background-image: url(../../images/Close\ Icon.svg);
+    height: 32px;
+    width: 32px;
+}

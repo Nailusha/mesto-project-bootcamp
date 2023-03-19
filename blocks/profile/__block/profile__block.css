@@ -1,0 +1,11 @@
+.profile__block {
+    display: flex;
+    align-items: flex-end;
+}
+@media (max-width: 620px) {
+    .profile__block {
+            align-items: normal;
+            justify-content: center;
+            margin: 0 0 0 28px;
+        }
+}

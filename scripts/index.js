@@ -19,8 +19,8 @@ form.addEventListener('submit', function(event) {
     // Берем новые значения из формы
     // Выбираем элемент, который нужно изменить
     // Меняем текстовое содержимое элемента
-    document.querySelector('.profile__title').textContent = document.querySelector('.form__input_title').placeholder;
-    document.querySelector('.profile__subtitle').textContent = document.querySelector('.form__input_subtitle').placeholder;
+    document.querySelector('.profile__title').textContent = document.querySelector('.form__input-title').placeholder;
+    document.querySelector('.profile__subtitle').textContent = document.querySelector('.form__input-subtitle').placeholder;
 
     // Закрываем форму
     document.querySelector('.popup').classList.remove('popup_opened');   

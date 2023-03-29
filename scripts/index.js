@@ -1,31 +1,43 @@
-let popupContainer = document.querySelector('.popup__container'); // Фон попап окна
-let popup = document.querySelector('.popup'); // Само окно
-let openPopupButton = document.querySelectorAll('.popup__opened'); // Кнопки для показа окна
-let closePopupButton = document.querySelector('.popup__button-closed'); // Кнопка для скрытия окна
-let buttonEdit = document.querySelector('.profile .profile__button-edit');
-let form = document.querySelector('.form');
+const popupProfile = document.querySelector('.popup__profile'); // Окно редактирования
+const popupCard = document.querySelector ('.popup__card'); // Окно добавления
+
+const popup = document.querySelector('.popup'); // Само окно
+
+const formProfile = document.querySelector('.form__profile');
+const formCard = document.querySelector('.form__card');
+
+const openPopupButton = document.querySelectorAll('.popup__opened'); // Кнопки для показа окна
+const closePopupButton = document.querySelector('.popup__button-closed'); // Кнопка для скрытия окна
+
+const buttonEdit = document.querySelector('.profile__button-edit'); // Кнопка редактирования
+const buttonAdd = document.querySelector('.profile__button-add'); // Кнопка добавления
+const buttonDelete = document.querySelector('.element__button-delete'); //Кнопка удаления
+const buttonLike = document.querySelector('.element__button-like'); //Кнопка лайка
+
 
 // Навешиваем событие появления формы
 buttonEdit.addEventListener('click', function () {
-    document.querySelector('.popup').classList.add('popup__opened');});
-
+    popup.classList.add('popup__opened');
+});
+buttonAdd.addEventListener('click', function () {
+    popup.classList.add('popup__opened');
+});
 
 // Навешиваем событие закрытия формы, если ничего менять не нужно
 closePopupButton.addEventListener('click', function () {
-    document.querySelector('.popup').classList.remove('popup__opened');});
+    popup.classList.remove('popup__opened');
+});
 
-
-// Навешиваем событие отправки формы как при помощи Enter,
-// так и при помощи кнопки
-form.addEventListener('submit', function(event) {
+formCard.addEventListener('submit', function(event) {
     event.preventDefault()
 
     // Берем новые значения из формы
     // Выбираем элемент, который нужно изменить
     // Меняем текстовое содержимое элемента
-    document.querySelector('.profile__title').textContent = document.querySelector('.form__input-title').placeholder;
-    document.querySelector('.profile__subtitle').textContent = document.querySelector('.form__input-subtitle').placeholder;
+    document.querySelector('.form__card-input-title').textContent = document.querySelector.value;
+    document.querySelector('.form__card-input-subtitle').textContent = document.querySelector.value;
 
     // Закрываем форму
-    document.querySelector('.popup').classList.remove('popup__opened');   
+    popup.classList.remove('popup__opened');   
 });
+

@@ -19,7 +19,7 @@
                     <div class="profile__description">
                         <div class="profile__block">
                         <h1 class="profile__title">Жак-Ив Кусто</h1>
-                        <button class="profile__button-edit popup__opened" type="button"></button>
+                        <button class="profile__button-edit" type="button"></button>
                         </div>
                         <p class="profile__subtitle">Исследователь океана</p>
                     </div>
@@ -29,13 +29,15 @@
                 <section class="elements">
                     <ul class="elements__list">
                         <li class="element">
+                            <button class="element__button-delete" type="button"></button>
                             <img class="element__list-item" src="./images/Mask-Group1.png" alt="Карачаевск">
                             <div class="element__description">
-                                <h2 class="element__title">Карачаевск</h2>
-                                <button class="element__button-like" type="button"></button>
+                            <h2 class="element__title">Карачаевск</h2>
+                            <button class="element__button-like" type="button"></button>
                             </div>
                         </li>
                         <li class="element">
+                            <button class="element__button-delete" type="button"></button>
                             <img class="element__list-item" src="./images/Mask-Group2.png" alt="Гора Эльбрус">
                             <div class="element__description">
                             <h2 class="element__title">Гора Эльбрус</h2>
@@ -43,6 +45,7 @@
                             </div>
                         </li>
                         <li class="element">
+                            <button class="element__button-delete" type="button"></button>
                             <img class="element__list-item" src="./images/Mask-Group3.png" alt="Домбай">
                             <div class="element__description">
                             <h2 class="element__title">Домбай</h2>
@@ -50,6 +53,7 @@
                             </div>
                         </li>
                         <li class="element">
+                            <button class="element__button-delete" type="button"></button>
                             <img class="element__list-item" src="./images/Mask-Group4.png" alt="Гора Эльбрус">
                             <div class="element__description">
                             <h2 class="element__title">Гора Эльбрус</h2>
@@ -57,6 +61,7 @@
                             </div>
                         </li>
                         <li class="element">
+                            <button class="element__button-delete" type="button"></button>
                             <img class="element__list-item" src="./images/Mask-Group5.png" alt="Домбай">
                             <div class="element__description">
                             <h2 class="element__title">Домбай</h2>
@@ -64,6 +69,7 @@
                             </div>
                         </li>
                         <li class="element">
+                            <button class="element__button-delete" type="button"></button>
                             <img class="element__list-item" src="./images/Mask-Group6.png" alt="Карачаево-Ч...">
                             <div class="element__description">
                             <h2 class="element__title">Карачаево-Черкеск</h2>
@@ -73,18 +79,38 @@
                     </ul>
                 </section>
 
-                <section class="popup">
-                    <div class="popup__container popup__opened">
+                <section class="popup popup__profile">
+                    <div class="popup__container">
                         <button class="popup__button-closed" type="button"></button>
-                        <form class="form" name="form-content">
+                        <form class="form form__profile" name="form-content">
                             <h2 class="form__title">Редактировать профиль</h2>
                             <fieldset class="form__input-container"> 
-                                <input class="form__input form__input-title" type="text" placeholder="Жак-Ив Кусто">
-                                <input class="form__input form__input-subtitle" type="text"  placeholder="Исследователь океана">
+                                <input class="form__input form__profile-input-title" type="text" value="Жак-Ив Кусто">
+                                <input class="form__input form__profile-input-subtitle" type="text"  value="Исследователь океана">
                             </fieldset>
                             <button class="form__input form__submit-button" type="button">Сохранить</button>
                         </form>
                     </div>
+                </section>
+
+                <section class="popup popup__card">
+                    <div class="popup__container"> 
+                        <button class="popup__button-closed" type="button"></button>
+                        <form class="form form__card" name="form-content">
+                            <h2 class="form__title">Новое место</h2>
+                            <fieldset class="form__input-container">
+                                <input class="form__input form__card-input-title" type="text" value="Байкал">
+                                <input class="form__input form__card-input-subtitle" type="text" value="https://images.unsplash.com/photo-1584891685425">
+                            </fieldset>
+                            <button class="form__input form__submit-button" type="button">Создать</button>
+                        </form>
+                    </div>
+                </section>
+
+                <section>
+                    <form>
+
+                    </form>
                 </section>
             </main>
 
@@ -93,6 +119,6 @@
             </footer>
         </div>
         
-        <script src="./script/script.js"></script>
+        <script src="./scripts/index.js"></script>
     </body>
 </html>

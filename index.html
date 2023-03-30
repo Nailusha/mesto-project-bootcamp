@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./pages/index.css">
-        <title>Maestro</title>
+        <title>Mestro</title>
     </head>
 
     <body class="body">
@@ -19,11 +19,11 @@
                     <div class="profile__description">
                         <div class="profile__block">
                         <h1 class="profile__title">Жак-Ив Кусто</h1>
-                        <button class="profile__button-edit" type="button"></button>
+                        <button class="profile__button-edit" id="buttonEdit" type="button"></button>
                         </div>
                         <p class="profile__subtitle">Исследователь океана</p>
                     </div>
-                    <button class="profile__button-add" type="button"></button>
+                    <button class="profile__button-add" id="buttonAdd" type="button"></button>
                 </section>   
 
                 <section class="elements">
@@ -82,7 +82,7 @@
                 <section class="popup popup__profile">
                     <div class="popup__container">
                         <button class="popup__button-closed" type="button"></button>
-                        <form class="form form__profile" name="form-content">
+                        <form class="form form__profile" name="form-profile-content">
                             <h2 class="form__title">Редактировать профиль</h2>
                             <fieldset class="form__input-container"> 
                                 <input class="form__input form__profile-input-title" type="text" value="Жак-Ив Кусто">
@@ -96,7 +96,7 @@
                 <section class="popup popup__card">
                     <div class="popup__container"> 
                         <button class="popup__button-closed" type="button"></button>
-                        <form class="form form__card" name="form-content">
+                        <form class="form form__card" name="form-card-content">
                             <h2 class="form__title">Новое место</h2>
                             <fieldset class="form__input-container">
                                 <input class="form__input form__card-input-title" type="text" value="Байкал">

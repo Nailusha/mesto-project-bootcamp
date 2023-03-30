@@ -14,7 +14,6 @@ const buttonAdd = document.querySelector('.profile__button-add'); // Кнопк�
 const buttonDelete = document.querySelector('.element__button-delete'); //Кнопка удаления
 const buttonLike = document.querySelector('.element__button-like'); //Кнопка лайка
 
-
 // Навешиваем событие появления формы
 buttonEdit.addEventListener('click', function () {
     popup.classList.add('popup__opened');
@@ -28,16 +27,10 @@ closePopupButton.addEventListener('click', function () {
     popup.classList.remove('popup__opened');
 });
 
-formCard.addEventListener('submit', function(event) {
-    event.preventDefault()
-
-    // Берем новые значения из формы
-    // Выбираем элемент, который нужно изменить
-    // Меняем текстовое содержимое элемента
-    document.querySelector('.form__card-input-title').textContent = document.querySelector.value;
-    document.querySelector('.form__card-input-subtitle').textContent = document.querySelector.value;
-
-    // Закрываем форму
+// Закрываем форму
     popup.classList.remove('popup__opened');   
-});
+
+
+
+
 

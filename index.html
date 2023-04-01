@@ -85,8 +85,8 @@
                         <form class="form form__profile" name="form-profile-content">
                             <h2 class="form__title">Редактировать профиль</h2>
                             <fieldset class="form__input-container"> 
-                                <input class="form__input form__profile-input-title" type="text" value="Жак-Ив Кусто">
-                                <input class="form__input form__profile-input-subtitle" type="text"  value="Исследователь океана">
+                                <input class="form__input form__profile-input-title" type="text" value="Жак-Ив Кусто" required>
+                                <input class="form__input form__profile-input-subtitle" type="text"  value="Исследователь океана" required>
                             </fieldset>
                             <button class="form__input form__submit-button" type="button">Сохранить</button>
                         </form>
@@ -99,18 +99,13 @@
                         <form class="form form__card" name="form-card-content">
                             <h2 class="form__title">Новое место</h2>
                             <fieldset class="form__input-container">
-                                <input class="form__input form__card-input-title" type="text" value="Байкал">
-                                <input class="form__input form__card-input-subtitle" type="text" value="https://images.unsplash.com/photo-1584891685425">
+                                <input class="form__input form__card-input-title" type="text" value="Байкал" required>
+                                <input class="form__input form__card-input-subtitle" type="text" value="https://images.unsplash.com/photo-1584891685425" required>
                             </fieldset>
-                            <button class="form__input form__submit-button" type="button">Создать</button>
+                            <button class="form__input form__submit-button" id="card-image" type="button">Создать</button>
+                            <div id="image-container"></div>
                         </form>
                     </div>
-                </section>
-
-                <section>
-                    <form>
-
-                    </form>
                 </section>
             </main>
 

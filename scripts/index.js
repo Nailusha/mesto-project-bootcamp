@@ -46,6 +46,7 @@ buttonLike.addEventListener ('click', function() {
         clicked = false;
     }
 });
+
 const cardImages = document.querySelectorAll('.element__list-item');
 const overlay = document.createElement('div');
 overlay.setAttribute('id', 'overlay');
@@ -96,7 +97,8 @@ const initialCards = [
   const cardImage = document.getElementById('card-image');
   const imageContainer = document.getElementById('image-container');
 
-createImage.addEventListener('click', function() {
+
+cardImage.addEventListener('click', function() {
   const image = document.createElement('img');
   image.setAttribute('src', 'path/to/image.jpg');
   image.setAttribute('alt', 'описание картинки');

@@ -26,6 +26,7 @@ buttonAdd.addEventListener('click', function () {
     add.classList.add('popup__opened');
 });
 
+
 const buttonDelete = document.querySelectorAll('.element__button-delete'); //кнопка удаления
 const imageItem = document.querySelectorAll('.element'); //действие с изображением
 
@@ -67,7 +68,7 @@ overlay.addEventListener('click', function() {
   this.removeChild(this.firstChild);
 });
 
-const initialCards = [
+const сards = [
     {
       name: 'Архыз',
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -94,17 +95,17 @@ const initialCards = [
     }
   ];
 
-  const cardImage = document.getElementById('card-image');
-  const imageContainer = document.getElementById('image-container');
 
 
-cardImage.addEventListener('click', function() {
-  const image = document.createElement('img');
-  image.setAttribute('src', 'path/to/image.jpg');
-  image.setAttribute('alt', 'описание картинки');
-  imageContainer.appendChild(image);
+  const cardImage = document.getElementById('.card-image');
+  const imageContainer = document.getElementById('.elements__list');
+
+  cardImage.addEventListener('click', () => {
+    const newCard = document.createElement('.ul');
+    newCard.classList.add('.card-image');
+    newCard.innerHTML = `
+      <h3>Заголовок карточки</h3>
+      <p>Описание карточки</p>
+    `;
+    imageContainer.appendChild(newCard);
 });
-
-
-
-

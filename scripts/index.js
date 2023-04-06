@@ -109,3 +109,6 @@ const сards = [
     `;
     imageContainer.appendChild(newCard);
 });
+
+const container = document.getElementById("example");
+console.log("container");

@@ -1,5 +1,7 @@
 const add = document.querySelector('.popup__card'); // получаем модификатор попапа для добавления
 const edit = document.querySelector('.popup__profile'); // получаем модификатор попапа для редактирвоания
+const example = document.getElementById("example");
+
 
 let closePopupButton = []; // кнопка для закрытия окна
 closePopupButton = document.querySelectorAll('.popup__button-closed'); // получаем массив всех кнопок closed
@@ -110,5 +112,3 @@ const сards = [
     imageContainer.appendChild(newCard);
 });
 
-const container = document.getElementById("example");
-console.log("container");

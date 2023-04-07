@@ -25,6 +25,21 @@ buttonAdd.addEventListener('click', function () {
     add.classList.add('popup__opened');
 });
 
+// Находим контейнер, в который будем добавлять карточки
+const container = document.querySelector('.card-image');
+
+// Находим шаблон карточки
+const cardTemplate = document.querySelector('#card-template');
+
+// Создаем новый узел на основе шаблона
+const cardNode = cardTemplate.content.cloneNode(true);
+
+// Находим элементы карточки внутри созданного узла
+const cardImage = cardNode.querySelector('.element__list-item');
+const cardTitle = cardNode.querySelector('.element__title');
+const likeButton = cardNode.querySelector('.element__button-like');
+const imageContainer = document.getElementById('.elements__list');
+
 const сards = [
   {
     name: 'Архыз',
@@ -53,20 +68,6 @@ const сards = [
 ];
 
 function createCard(data) {
-// Находим контейнер, в который будем добавлять карточки
-const container = document.querySelector('.card-image');
-
-// Находим шаблон карточки
-const cardTemplate = document.querySelector('#card-template');
-
-// Создаем новый узел на основе шаблона
-const cardNode = cardTemplate.content.cloneNode(true);
-
-// Находим элементы карточки внутри созданного узла
-const cardImage = cardNode.querySelector('.element__list-item');
-const cardTitle = cardNode.querySelector('.element__title');
-const likeButton = cardNode.querySelector('.element__button-like');
-const imageContainer = document.getElementById('.elements__list');
 
   cardImage.src = data.link;
   cardTitle.textContent = data.name;

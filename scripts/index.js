@@ -25,6 +25,34 @@ buttonAdd.addEventListener('click', function () {
     add.classList.add('popup__opened');
 });
 
+const сards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
+function createCard(data) {
 // Находим контейнер, в который будем добавлять карточки
 const container = document.querySelector('.card-image');
 
@@ -39,6 +67,17 @@ const cardImage = cardNode.querySelector('.element__list-item');
 const cardTitle = cardNode.querySelector('.element__title');
 const likeButton = cardNode.querySelector('.element__button-like');
 const imageContainer = document.getElementById('.elements__list');
+
+  cardImage.src = data.link;
+  cardTitle.textContent = data.name;
+
+  return cardNode;
+}
+
+buttonAdd.addEventListener('click', function() {
+  const newCard = createCard(cards);
+  container.appendChild(newCard);
+});
 
 // Добавляем созданную карточку в контейнер
 container.addEventListener('click', () => {

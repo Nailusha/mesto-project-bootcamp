@@ -1,23 +1,20 @@
 const add = document.querySelector('.popup__card'); // получаем модификатор попапа для добавления
 const edit = document.querySelector('.popup__profile'); // получаем модификатор попапа для редактирвоания
-const example = document.getElementById("example");
-
 
 let closePopupButton = []; // кнопка для закрытия окна
 closePopupButton = document.querySelectorAll('.popup__button-closed'); // получаем массив всех кнопок closed
 
-
 closePopupButton.forEach((element) => { // перебериаем все кнопки закрыть
 
-    element.addEventListener('click', function () { // навешиваем на кнопку событие клика
+  element.addEventListener('click', function () { // навешиваем на кнопку событие клика
 
-        if(edit.classList.contains('popup__opened')){ // проверяем, если попап edit открыт
-            edit.classList.remove('popup__opened'); // закрываем 
-        }
-        if(add.classList.contains('popup__opened')){ // проверяем, add если попап открыт
-            add.classList.remove('popup__opened'); // закрываем
-        }
-    });
+    if(edit.classList.contains('popup__opened')){ // проверяем, если попап edit открыт
+        edit.classList.remove('popup__opened'); // закрываем 
+      }
+    if(add.classList.contains('popup__opened')){ // проверяем, add если попап открыт
+        add.classList.remove('popup__opened'); // закрываем
+      }
+  });
 
 })
 
@@ -28,87 +25,47 @@ buttonAdd.addEventListener('click', function () {
     add.classList.add('popup__opened');
 });
 
+// Находим контейнер, в который будем добавлять карточки
+const container = document.querySelector('.card-image');
 
-const buttonDelete = document.querySelectorAll('.element__button-delete'); //кнопка удаления
-const imageItem = document.querySelectorAll('.element'); //действие с изображением
+// Находим шаблон карточки
+const cardTemplate = document.querySelector('#card-template');
 
-    for (let i = 0; i < buttonDelete.length; i++) {
-        buttonDelete[i].addEventListener('click', function() {
-            imageItem[i].remove();
-    });
-  };
+// Создаем новый узел на основе шаблона
+const cardNode = cardTemplate.content.cloneNode(true);
 
-const buttonLike = document.querySelector('.element__button-like'); //кнопка лайка
+// Находим элементы карточки внутри созданного узла
+const cardImage = cardNode.querySelector('.element__list-item');
+const cardTitle = cardNode.querySelector('.element__title');
+const likeButton = cardNode.querySelector('.element__button-like');
+const imageContainer = document.getElementById('.elements__list');
+
+// Добавляем созданную карточку в контейнер
+container.addEventListener('click', () => {
+    const container = document.createElement('.ul');
+    container.classList.add('.card-image');
+    container.innerHTML = `
+      <h3>Заголовок карточки</h3>
+      <p>Описание карточки</p>
+    `;
+    imageContainer.appendChild(cardNode);
+});
+
+// Добавляем слушатели событий для кнопок
 let clicked = false;
-buttonLike.addEventListener ('click', function() {
+likeButton.addEventListener ('click', function() {
     if (!clicked) {
-        buttonLike.style.backgroundColor = 'black';
+      likeButton.style.backgroundColor = 'black';
         clicked = true;
     } else {
-        buttonLike.style.backgroundColor = '';
+      likeButton.style.backgroundColor = '';
         clicked = false;
     }
 });
 
-const cardImages = document.querySelectorAll('.element__list-item');
-const overlay = document.createElement('div');
-overlay.setAttribute('id', 'overlay');
-document.body.appendChild(overlay);
-
-for (let i = 0; i < cardImages.length; i++) {
-    cardImages[i].addEventListener('click', function() {
-    const imageSrc = this.getAttribute('src');
-    const overlayImage = document.createElement('img');
-    overlayImage.setAttribute('src', imageSrc);
-    overlay.appendChild(overlayImage);
-    overlay.style.display = 'block';
+const deleteButton = cardNode.querySelector('.element__button-delete');
+  for (let i = 0; i < deleteButton.length; i++) {
+    deleteButton[i].addEventListener('click', function() {
+      cardImage[i].remove();
   });
-}
-
-overlay.addEventListener('click', function() {
-  this.style.display = 'none';
-  this.removeChild(this.firstChild);
-});
-
-const сards = [
-    {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-  ];
-
-
-
-  const cardImage = document.getElementById('.card-image');
-  const imageContainer = document.getElementById('.elements__list');
-
-  cardImage.addEventListener('click', () => {
-    const newCard = document.createElement('.ul');
-    newCard.classList.add('.card-image');
-    newCard.innerHTML = `
-      <h3>Заголовок карточки</h3>
-      <p>Описание карточки</p>
-    `;
-    imageContainer.appendChild(newCard);
-});
-
+  };

@@ -1,6 +1,5 @@
 const add = document.querySelector('.popup__card'); // получаем модификатор попапа для добавления
 const edit = document.querySelector('.popup__profile'); // получаем модификатор попапа для редактирвоания
-const cardConteiner = document.querySelector('.element');
 
 let closePopupButton = []; // кнопка для закрытия окна
 closePopupButton = document.querySelectorAll('.popup__button-closed'); // получаем массив всех кнопок closed
@@ -26,8 +25,8 @@ buttonAdd.addEventListener('click', function () {
     add.classList.add('popup__opened');
 });
 
-
-const сardsImage = [
+const container = document.querySelector('.elements__list');
+const cardsImage = [
   {
     name: 'Архыз',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -54,11 +53,11 @@ const сardsImage = [
   }
 ];
 
-function createCardElement(cardData) {
   
-  // Находим шаблон карточки
-  const cardTemplate = document.querySelector('#card-template');
+// Находим шаблон карточки
+const cardTemplate = document.getElementById('card-template');
 
+function createCardElement(cardData) {
   // Создаем новый узел на основе шаблона
   const cardNode = cardTemplate.content.cloneNode(true);
 
@@ -71,28 +70,22 @@ function createCardElement(cardData) {
 
   const likeButton = cardNode.querySelector('.element__button-like');
   // Добавляем слушатели событий для кнопок
-  let clicked = false;
   likeButton.addEventListener ('click', function() {
-      if (!clicked) {
-        likeButton.style.backgroundColor = 'black';
-          clicked = true;
-      } else {
-        likeButton.style.backgroundColor = '';
-          clicked = false;
-      }
+    likeButton.classList.toggle('element__button-like_active');
   });
-  const deleteButton = cardNode.querySelector('.element__button-delete');
-    for (let i = 0; i < deleteButton.length; i++) {
-      deleteButton[i].addEventListener('click', function() {
-        cardImage[i].remove();
-    });
-    };
 
-  // Добавляем созданную карточку в контейнер
-  container.appendChild(cardNode);
+  const deleteButton = cardNode.querySelector('.element__button-delete');
+  deleteButton.addEventListener('click', function() {
+    cardNode.remove();
+  });
 
   return cardNode;
-};
+}
+
+// Создаем карточки из массива данных
+cardsImage.forEach(function(cardData) {
+  container.append(createCardElement(cardData));
+});
 
 
 

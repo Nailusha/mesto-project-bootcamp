@@ -1,7 +1,8 @@
 .element__list-item {
     display: block;
     border-radius: 10px 10px 0 0;
-    max-width: 282px;
+    width: 282px;
+    height: 361px;
     cursor: pointer;
 }
 #overlay {

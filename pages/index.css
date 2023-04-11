@@ -27,6 +27,7 @@
 @import url(../blocks/__button-like/element__button-like.css);
 @import url(../blocks/__button-closed/popup__button-closed.css);
 @import url(../blocks/__button-delete/element__button-delete.css);
+@import url(../blocks/__button-like_active/element__button-like_active.css);
 
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/__container/popup__container.css);

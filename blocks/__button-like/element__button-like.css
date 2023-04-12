@@ -1,7 +1,6 @@
 .element__button-like {
     width: 22px;
     height: 19px;
-    background-color: rgba(228, 228, 228, 0);
     background-image: url(../../images/like.svg);
     
     border: 0;

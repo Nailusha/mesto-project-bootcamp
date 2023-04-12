@@ -76,60 +76,30 @@ function createCardElement(cardData) {
   const cardTitle = cardNode.querySelector('.element__title');
   cardTitle.textContent = cardData.name;
 
-  const likeButton = cardNode.querySelector('.element__button-like');
-  // Добавляем слушатели событий для кнопок
-  for (let i = 0; i < likeButton.length; i++) {
-  likeButton[i].addEventListener ('click', function() {
-    likeButton.classList.toggle('element__button-like_active');
+  const likeButtons = cardNode.querySelectorAll('.element__button-like');
+  likeButtons.forEach(function(likeButton) {
+  likeButton.addEventListener('click', function() {
+    if (likeButton.classList.contains('element__button-like_active')) {
+      likeButton.classList.remove('element__button-like_active');
+    } else {
+      likeButton.classList.add('element__button-like_active');
+    }
   });
-};
-
-const deleteButton = cardNode.querySelectorAll('.element__button-delete');
-deleteButton.forEach(function(button) {
+});
+const deleteButtons = cardNode.querySelectorAll('.element__button-delete');
+deleteButtons.forEach(function(button) {
   button.addEventListener('click', function() {
-    deleteButton[i].closest('.element').remove();
+    button.closest('.element').remove();
   });
 });
 
   return cardNode;
 }
-
 // Создаем карточки из массива данных
 cardsImage.forEach(function(cardData) {
   container.append(createCardElement(cardData));
 });
 
-const formCard = document.querySelector('.form__card');
-formCard.addEventListener('submit', function(event) {
-  event.preventDefault();
-
-  // Получаем значения полей формы
-  const cardTitle = document.querySelector('.form__card-input-title').value;
-  const cardSubtitle = document.querySelector('.form__card-input-subtitle').value;
-
-  // Создаем новую карточку
-  const card = document.createElement('div');
-  card.classList.add('card');
-
-  // Добавляем нужные значения в карточку
-  const titleElement = document.createElement('h2');
-  titleElement.textContent = title;
-  card.appendChild(titleElement);
-
-  const subtitleElement = document.createElement('p');
-  subtitleElement.textContent = subtitle;
-  card.appendChild(subtitleElement);
-
-  // Добавляем карточку на страницу
-  const container = document.querySelector('.elements__list');
-  container.appendChild(card);
-
-  // Скрываем попап
-  add.classList.remove('popup__opened');
-
-  // Очищаем поля формы
-  formCard.reset();
-});
 
 function handleProfileSubmit (event) {
   event.preventDefault()
@@ -139,7 +109,7 @@ function handleProfileSubmit (event) {
 
   closePopup(edit);
 };
-
+profileEdit.addEventListener('submit', handleFormSubmit);
 
 
 

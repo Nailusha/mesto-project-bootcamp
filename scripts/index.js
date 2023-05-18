@@ -4,9 +4,10 @@ const popupOpenImage = document.querySelector('.popup__open-image');
 
 const popupGlobal = document.querySelector('.popup');
 
+const profileTitle = document.querySelector('.profile__title');
+const profileSubtitle = document.querySelector('.profile__subtitle');
+
 const profileEdit = document.querySelector('.profile-create');
-const profileTitle = document.querySelector('.form__profile-input-title');
-const profileSubtitle = document.querySelector('.form__profile-input-subtitle');
 
 let closePopupButton = []; // кнопка для закрытия окна
 closePopupButton = document.querySelectorAll('.popup__button-closed'); // получаем массив всех кнопок closed
@@ -86,30 +87,81 @@ function createCardElement(cardData) {
     }
   });
 });
+
 const deleteButtons = cardNode.querySelectorAll('.element__button-delete');
 deleteButtons.forEach(function(button) {
   button.addEventListener('click', function() {
-    button.closest('.element').remove();
+    button.closest('.elements__list').remove();
   });
 });
 
   return cardNode;
 }
+
 // Создаем карточки из массива данных
 cardsImage.forEach(function(cardData) {
   container.append(createCardElement(cardData));
 });
 
 
-function handleProfileSubmit (event) {
-  event.preventDefault()
 
-  profileTitle.textContent = document.querySelector('.form__input-profile-title').value;
-  profileSubtitle.textContent = document.querySelector('.form__input-profile-subtitle').value;
+// Находим форму в DOM
+const formCard = document.querySelector('.form__profile');
 
-  closePopup(edit);
-};
-profileEdit.addEventListener('submit', handleFormSubmit);
+// Находим поля формы в DOM
+const profileFormTitle = document.querySelector('.form__profile-input-title');
+const profileFormSubtitle = document.querySelector('.form__profile-input-subtitle');
+
+// Обработчик «отправки» формы, хотя пока
+// она никуда отправляться не будет
+function handleFormSubmit(evt) {
+  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
+  // Получите значение полей jobInput и nameInput из свойства value
+  const titleValue = profileFormTitle.value;
+  const subtitleValue = profileFormSubtitle.value;
+
+  // Выберите элементы, куда должны быть вставлены значения полей
+  
+  // Вставьте новые значения с помощью textContent
+  profileTitle.textContent = titleValue;
+  profileSubtitle.textContent = subtitleValue;
+
+  popupGlobal.classList.remove("popup__opened");
+}
+
+// Прикрепляем обработчик к форме:
+// он будет следить за событием "submit" - "отправка"
+formCard.addEventListener('submit', handleFormSubmit);
+
+
+
+const addImageButton = document.querySelector('.card-create'); // Кнопка в попапе для добавления картинки
+const imageLinkInput = document.querySelector('.form__card-input-subtitle'); // Поле ввода ссылки на картинку в попапе для добавления картинки
+const imageNameInput = document.querySelector('.form__card-input-title'); // Поле ввода имени картинки в попапе для добавления картинки
+
+addImageButton.addEventListener('click', function () {
+  const imageLink = imageLinkInput.value;
+  const imageName = imageNameInput.value;
+  
+  if (imageLink && imageName) {
+    const newCardData = {
+      name: imageName,
+      link: imageLink
+    };
+    
+    const newCardElement = createCardElement(newCardData);
+    container.append(newCardElement);
+    
+    // Очистка полей ввода
+    imageLinkInput.value = '';
+    imageNameInput.value = '';
+    
+    // Закрытие попапа
+    popupGlobal.classList.remove('popup__opened');
+  }
+});
+
+
 
 
 

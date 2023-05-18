@@ -36,8 +36,8 @@
                         <form class="form form__profile" name="form-profile-content">
                             <h2 class="form__title">Редактировать профиль</h2>
                             <fieldset class="form__input-container"> 
-                                <input class="form__input form__profile-input-title" name="form-profile" type="text" value="Жак-Ив Кусто" required>
-                                <input class="form__input form__profile-input-subtitle" name="form-profile" type="text" value="Исследователь океана" required>
+                                <input class="form__input form__profile-input-title" name="form-profile"  type="text" placeholder="Автор" required>
+                                <input class="form__input form__profile-input-subtitle" name="form-profile"  type="text" placeholder="Род деятельности" required>
                             </fieldset>
                             <button class="form__input form__submit-button profile-create" type="submit">Сохранить</button>
                         </form>
@@ -50,8 +50,8 @@
                         <form class="form form__card" name="form-card-content">
                             <h2 class="form__title">Новое место</h2>
                             <fieldset class="form__input-container">
-                                <input class="form__input form__card-input-title" name="form-card" type="text" required>
-                                <input class="form__input form__card-input-subtitle" name="form-card" type="text" required>
+                                <input class="form__input form__card-input-title" name="form-card" type="text" placeholder="Название" required>
+                                <input class="form__input form__card-input-subtitle" name="form-card" type="url" placeholder="Ссылка" required>
                             </fieldset>
                             <button class="form__input form__submit-button card-create" type="submit">Создать</button>
                         </form>
@@ -60,7 +60,7 @@
 
                 <div class="popup popup__open-image">
                     <div class="popup__container-open-image">
-                        <button class="popup__button-closed" type="button"></button>
+                        <button class="popup__button-closed" type="image"></button>
                         <figure class="popup__figure">
                             <img class="popup__image" src="#" alt="Изображение карточки">
                             <figcaption class="popup__title"></figcaption>

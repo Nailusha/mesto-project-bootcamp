@@ -1,37 +1,20 @@
-const add = document.querySelector('.popup__card'); 
-const edit = document.querySelector('.popup__profile'); 
-const popupOpenImage = document.querySelector('.popup__open-image');
+const add = document.querySelector('.popup__card'); // окно создания карточки
+const edit = document.querySelector('.popup__profile'); // окно профиля
 
-const popupGlobal = document.querySelector('.popup');
+const popupGlobal = document.querySelectorAll('.popup');
+
+const buttonEdit = document.querySelector('.profile__button-edit'); // кнопка редактирования профиля
+const buttonAdd = document.querySelector('.profile__button-add'); //кнопка создания карточек
 
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
-
 const profileEdit = document.querySelector('.profile-create');
 
-let closePopupButton = []; // кнопка для закрытия окна
-closePopupButton = document.querySelectorAll('.popup__button-closed'); // получаем массив всех кнопок closed
+const formCard = document.querySelector('.form__profile');
+const profileFormTitle = document.querySelector('.form__profile-input-title');
+const profileFormSubtitle = document.querySelector('.form__profile-input-subtitle');
 
-closePopupButton.forEach((element) => { // перебериаем все кнопки закрыть
-
-  element.addEventListener('click', function () { // навешиваем на кнопку событие клика
-
-    if(edit.classList.contains('popup__opened')){ // проверяем, если попап edit открыт
-        edit.classList.remove('popup__opened'); // закрываем 
-      }
-    if(add.classList.contains('popup__opened')){ // проверяем, add если попап открыт
-        add.classList.remove('popup__opened'); // закрываем
-      }
-  });
-
-})
-
-buttonEdit.addEventListener('click', function () {
-    edit.classList.add('popup__opened');
-});
-buttonAdd.addEventListener('click', function () {
-    add.classList.add('popup__opened');
-});
+const cardTemplate = document.getElementById('card-template').content.querySelector('.element');
 
 const container = document.querySelector('.elements__list');
 const cardsImage = [
@@ -61,15 +44,34 @@ const cardsImage = [
   }
 ];
 
-  
-// Находим шаблон карточки
-const cardTemplate = document.getElementById('card-template');
+let closePopupButton = []; // кнопка для закрытия окна
+closePopupButton = document.querySelectorAll('.popup__button-closed'); // получаем массив всех кнопок closed
 
+closePopupButton.forEach((element) => { // перебериаем все кнопки закрыть
+
+  element.addEventListener('click', function () { // навешиваем на кнопку событие клика
+
+    if(edit.classList.contains('popup__opened')){ // проверяем, если попап edit открыт
+        edit.classList.remove('popup__opened'); // закрываем 
+      }
+    if(add.classList.contains('popup__opened')){ // проверяем, add если попап открыт
+        add.classList.remove('popup__opened'); // закрываем
+      }
+  });
+
+});
+
+buttonEdit.addEventListener('click', function () {
+    edit.classList.add('popup__opened');
+
+});
+buttonAdd.addEventListener('click', function () {
+    add.classList.add('popup__opened');
+});
+
+// функция которая будет размещать карточки
 function createCardElement(cardData) {
-  // Создаем новый узел на основе шаблона
-  const cardNode = cardTemplate.content.cloneNode(true);
-
-  // Находим элементы карточки внутри созданного узла
+  const cardNode = cardTemplate.cloneNode(true);
   const cardImage = cardNode.querySelector('.element__list-item');
   cardImage.src = cardData.link;
   cardImage.alt = cardData.name;
@@ -78,91 +80,91 @@ function createCardElement(cardData) {
   cardTitle.textContent = cardData.name;
 
   const likeButtons = cardNode.querySelectorAll('.element__button-like');
-  likeButtons.forEach(function(likeButton) {
-  likeButton.addEventListener('click', function() {
-    if (likeButton.classList.contains('element__button-like_active')) {
-      likeButton.classList.remove('element__button-like_active');
-    } else {
-      likeButton.classList.add('element__button-like_active');
-    }
-  });
-});
 
-const deleteButtons = cardNode.querySelectorAll('.element__button-delete');
-deleteButtons.forEach(function(button) {
-  button.addEventListener('click', function() {
-    button.closest('.elements__list').remove();
+  likeButtons.forEach(function(likeButton) {
+    likeButton.addEventListener('click', function() {
+      if (likeButton.classList.contains('element__button-like_active')) {
+        likeButton.classList.remove('element__button-like_active');
+      } else {
+        likeButton.classList.add('element__button-like_active');
+      }
+    });
   });
-});
+
+  const deleteButtons = cardNode.querySelectorAll('.element__button-delete');
+  deleteButtons.forEach(function(button) {
+    button.addEventListener('click', function() {
+      button.closest('.element').remove();
+    });
+  });
 
   return cardNode;
 }
 
-// Создаем карточки из массива данных
-cardsImage.forEach(function(cardData) {
-  container.append(createCardElement(cardData));
+cardsImage.forEach(cardData => {
+  const newCard = createCardElement(cardData);
+  container.append(newCard);
+});
+
+const popupOpenImage = document.querySelector('.popup__open-image');
+const popupImage = document.querySelector('.popup__image');
+const popupTitle = document.querySelector('.popup__title');
+
+// реализовываем открытие картинок во всплывающем окне
+openImageButtons.forEach(function(button) {
+  button.addEventListener('click', function() {
+    const cardNode = button.closest('.element');
+    const cardImage = cardNode.querySelector('.element__list-item');
+    const cardTitle = cardNode.querySelector('.element__title');
+    popupImage.src = cardImage.src;
+    popupImage.alt = cardImage.alt;
+    popupTitle.textContent = cardTitle.textContent;
+    popupOpenImage.classList.add('popup__opened');
+  });
+});
+
+closePopupButton.addEventListener('click', function() {
+  popupOpenImage.classList.remove('popup__opened');
+});
+
+const cardForm = document.querySelector('.form__card');
+const cardTitleInput = document.querySelector('.form__card-input-title');
+const cardSubtitleInput = document.querySelector('.form__card-input-subtitle');
+const cardCreateButton = document.querySelector('.card-create');
+
+// реализовывает добавление карточек на страницу
+cardForm.addEventListener('submit', function(event) {
+  event.preventDefault();
+  const newCardData = {
+    name: cardTitleInput.value,
+    link: cardSubtitleInput.value
+  };
+  const newCard = createCardElement(newCardData);
+  container.append(newCard);
+  cardForm.reset();
+  add.classList.remove('popup__opened');
+});
+
+cardCreateButton.addEventListener('click', function() {
+  edit.classList.remove('popup__opened');
+  add.classList.add('popup__opened');
 });
 
 
-
-// Находим форму в DOM
-const formCard = document.querySelector('.form__profile');
-
-// Находим поля формы в DOM
-const profileFormTitle = document.querySelector('.form__profile-input-title');
-const profileFormSubtitle = document.querySelector('.form__profile-input-subtitle');
-
-// Обработчик «отправки» формы, хотя пока
-// она никуда отправляться не будет
+// функция для редактирования данных профиля
 function handleFormSubmit(evt) {
-  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-  // Получите значение полей jobInput и nameInput из свойства value
+  evt.preventDefault();
+
   const titleValue = profileFormTitle.value;
   const subtitleValue = profileFormSubtitle.value;
 
-  // Выберите элементы, куда должны быть вставлены значения полей
-  
-  // Вставьте новые значения с помощью textContent
   profileTitle.textContent = titleValue;
   profileSubtitle.textContent = subtitleValue;
 
   popupGlobal.classList.remove("popup__opened");
 }
 
-// Прикрепляем обработчик к форме:
-// он будет следить за событием "submit" - "отправка"
 formCard.addEventListener('submit', handleFormSubmit);
-
-
-
-const addImageButton = document.querySelector('.card-create'); // Кнопка в попапе для добавления картинки
-const imageLinkInput = document.querySelector('.form__card-input-subtitle'); // Поле ввода ссылки на картинку в попапе для добавления картинки
-const imageNameInput = document.querySelector('.form__card-input-title'); // Поле ввода имени картинки в попапе для добавления картинки
-
-addImageButton.addEventListener('click', function () {
-  const imageLink = imageLinkInput.value;
-  const imageName = imageNameInput.value;
-  
-  if (imageLink && imageName) {
-    const newCardData = {
-      name: imageName,
-      link: imageLink
-    };
-    
-    const newCardElement = createCardElement(newCardData);
-    container.append(newCardElement);
-    
-    // Очистка полей ввода
-    imageLinkInput.value = '';
-    imageNameInput.value = '';
-    
-    // Закрытие попапа
-    popupGlobal.classList.remove('popup__opened');
-  }
-});
-
-
-
 
 
 

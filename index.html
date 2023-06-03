@@ -33,11 +33,27 @@
                 <section class="popup popup__profile">
                     <div class="popup__container">
                         <button class="popup__button-closed" type="button"></button>
-                        <form class="form form__profile" name="form-profile-content">
+                        <form class="form form__profile" name="profilecontent" novalidate>
                             <h2 class="form__title">Редактировать профиль</h2>
                             <fieldset class="form__input-container"> 
-                                <input class="form__input form__profile-input-title" name="form-profile"  type="text" placeholder="Автор" required>
-                                <input class="form__input form__profile-input-subtitle" name="form-profile"  type="text" placeholder="Род деятельности" required>
+                                <input class="form__input form__profile-input-title" 
+                                id="user-name" 
+                                name="formprofile"  
+                                type="text" 
+                                placeholder="Автор" 
+                                required
+                                minlength="2"
+                                maxlength="40">
+                                <span class="form__input_error" id="error-formprofile">Текст ошибки</span>
+                                <input class="form__input form__profile-input-subtitle" 
+                                id="user-profi" 
+                                name="formprofi"  
+                                type="text" 
+                                placeholder="Род деятельности" 
+                                required
+                                minlength="2"
+                                maxlength="200">
+                                <span class="form__input_error" id="error-formprofi">Текст ошибки</span>
                             </fieldset>
                             <button class="form__input form__submit-button profile-create" type="submit">Сохранить</button>
                         </form>
@@ -47,11 +63,25 @@
                 <section class="popup popup__card">
                     <div class="popup__container"> 
                         <button class="popup__button-closed" type="button"></button>
-                        <form class="form form__card" name="form-card-content">
+                        <form class="form form__card" name="cardcontent" novalidate>
                             <h2 class="form__title">Новое место</h2>
                             <fieldset class="form__input-container">
-                                <input class="form__input form__card-input-title" name="form-card" type="text" placeholder="Название" required>
-                                <input class="form__input form__card-input-subtitle" name="form-card" type="url" placeholder="Ссылка" required>
+                                <input class="form__input form__card-input-title" 
+                                id="card-name" 
+                                name="formcard" 
+                                type="text" 
+                                placeholder="Название" 
+                                required
+                                minlength="2"
+                                maxlength="30">
+                                <span class="form__input_error" id="error-formcard">Вы пропустили это поле.</span>
+                                <input class="form__input form__card-input-subtitle" 
+                                id="card-email" 
+                                name="formaddress" 
+                                type="url" 
+                                placeholder="Ссылка" 
+                                required>
+                                <span class="form__input_error" id="error-formaddress">Введите адрeс сайта.</span>
                             </fieldset>
                             <button class="form__input form__submit-button card-create" type="submit">Создать</button>
                         </form>

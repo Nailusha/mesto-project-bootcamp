@@ -41,6 +41,7 @@
 @import url(../blocks/form/__title/form__title.css);
 @import url(../blocks/form/__input-container/form__input-container.css);
 @import url(../blocks/form/__input/form__input.css);
+@import url(../blocks/form/__input_type_error/form__input_type_error.css);
 @import url(../blocks/form/__profile-input-title/form__profile-input-title.css);
 @import url(../blocks/form/__profile-input-subtitle/form__profile-input-subtitle.css);
 @import url(../blocks/form/__submit-button/form__submit-button.css);

@@ -18,15 +18,16 @@ const buttonAdd = document.querySelector('.profile__button-add'); //кнопка
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
 
-const profileEdit = document.querySelector('.profile-create'); // кнопка сохранить
+const profileCreateButton = document.querySelector('.profile-create'); // кнопка сохранить
+const cardCreateButton = document.querySelector('.card-create');// кнопка создать
+
 const formCard = document.querySelector('.form__profile');
 const profileFormTitle = document.querySelector('.form__profile-input-title');
 const profileFormSubtitle = document.querySelector('.form__profile-input-subtitle');
 
 const cardForm = document.querySelector('.form__card');
-const cardTitleInput = document.querySelector('.form__card-input-title');
-const cardSubtitleInput = document.querySelector('.form__card-input-subtitle');
-const cardCreateButton = document.querySelector('.card-create');
+const cardTitleInput = cardForm.querySelector('.form__card-input-title');
+const cardSubtitleInput = cardForm.querySelector('.form__card-input-subtitle');
 
 const cardTemplate = document.getElementById('card-template').content.querySelector('.element'); // шаблон
 
@@ -60,12 +61,12 @@ const cardsImage = [
 
 // открытие попапа
 function openPopup(popup) {
-  popup.classList.add('popup__opened');
+  popup.classList.add('popup_opened');
 }
 
 // закрытие попапа
 function closePopup(popup) {
-  popup.classList.remove('popup__opened');
+  popup.classList.remove('popup_opened');
 }
 
 // функция для редактирования данных профиля
@@ -78,7 +79,42 @@ function handleFormSubmit(evt) {
   profileTitle.textContent = titleValue;
   profileSubtitle.textContent = subtitleValue;
 
-  profileWindow.classList.remove("popup__opened");
+  closePopup(profileWindow);
+}
+
+const userForm = document.forms.profilecontent;
+const userNameFiled = userForm.formprofile;
+
+function handleSubmitButton(evt) {
+  evt.preventDefault();
+  
+}
+
+// проверка валидации
+function chekValid() {
+  if(userNameFiled.validity.valid) {
+    hideError();
+  } else {
+    showErorr();
+  };
+}
+
+userNameFiled.addEventListener('input', chekValid);
+userForm.addEventListener('sumbit', handleSubmitButton);
+
+// показывает ошибку
+function showErorr() {
+    console.log(userNameFiled.validationMessange);
+    const spanId = `error-${userNameFiled.id}`;
+    const errorField = document.getElementById(spanId);
+    errorField.textContent = userNameFiled.validationMessange;
+}
+//скрывает ошибку
+function hideError() {
+    console.log('Валидно');
+    const spanId = `error-${userNameFiled.id}`;
+    const errorField = document.getElementById(spanId);
+    errorField.textContent = '';
 }
 
 // функция которая будет размещать карточки
@@ -117,20 +153,39 @@ cardsImage.forEach(function(cardData) {
 // добавление новой карточки
 function handleNewCard(evt) {
   evt.preventDefault();
-  const newCard = createCardElement(cardTitleInput.value, cardSubtitleInput.value);
-  container.prepend(newCard);
-  popupContainer.reset();
 
-  closePopup();
+  const newCardData = {
+    name: cardTitleInput.value,
+    link: cardSubtitleInput.value
+  };
+  const newCard = createCardElement(newCardData);
+  container.prepend(newCard);
+  cardForm.reset();
+
+  closePopup(cardWindow);
 }
+
 
 //функция на открытие изобрыжения
 function handleOpenImage(container, popupOpenImage) {
   popupImage.src = container.querySelector('.element__list-item').src;
   popupImageTitle.textContent = container.querySelector('.element__title').text;
   
-  console.log(popupOpenImage);
   openPopup(popupOpenImage);
+}
+
+// функция закрытия OVERLAY
+function handleOverlay(evt) {
+  if(evt.target === evt.currentTarget) {
+    closePopup(evt.target);
+  };
+}
+
+// функция закрытия ESC
+function handleEsc(evt) {
+  if( evt.key === 'Escape') {
+    closePopup(popupOpenImage);
+  };
 }
 
 //функция на лайк
@@ -165,9 +220,17 @@ imageCloseBtn.addEventListener('click', () =>
   closePopup(popupOpenImage)
 );
 
+// слушатели на кнопки
+profileCreateButton.addEventListener('click', closePopup);
+cardCreateButton.addEventListener('click', closePopup);
+
 cardWindow.addEventListener('submit', handleNewCard);
 profileWindow.addEventListener('submit', handleFormSubmit);
 
+// слушатель на весь документ для работы Escape
+document.addEventListener('keydown', handleEsc);
 
+// слушатель для закрытия OVERLAY
+popupOpenImage.addEventListener('click', handleOverlay);
 
 

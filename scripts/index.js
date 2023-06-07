@@ -80,40 +80,44 @@ function handleFormSubmit(evt) {
 
   closePopup(profileWindow);
 }
+
 const userForm = document.forms.profilecontent;
 const userNameFiled = userForm.formprofile;
 
-function handleSubmitButton(evt) {
-  evt.preventDefault();
-  
-}
-
-// проверка валидации
-function chekValid() {
-  if(userNameFiled.validity.valid) {
-    hideError();
-  } else {
-    showErorr();
-  };
-}
-
-userNameFiled.addEventListener('input', chekValid);
-userForm.addEventListener('sumbit', handleSubmitButton);
-
 // показывает ошибку
-function showErorr() {
-    console.log(userNameFiled.validationMessange);
-    const spanId = `error-${userNameFiled.id}`;
-    const errorField = document.getElementById(spanId);
-    errorField.textContent = userNameFiled.validationMessange;
+function showErorr(input, errorMessange) {
+  const spanId = `error-${input.id}`;
+  const errorField = document.getElementById(spanId);
+  errorField.textContent = errorMessange;
 }
+
 //скрывает ошибку
-function hideError() {
-    console.log('Валидно');
-    const spanId = `error-${userNameFiled.id}`;
+function hideError(input) {
+    const spanId = `error-${input.id}`;
     const errorField = document.getElementById(spanId);
     errorField.textContent = '';
 }
+
+// проверка валидации
+function checkValid(input) {
+  if (input.validity.valid) {
+    hideError(input);
+  } else {
+    showErorr(input, input.validationMessage);
+  }
+}
+
+const inputList = document.querySelectorAll('.form__input');
+inputList.forEach(input => {
+  input.addEventListener('input', () => checkValid(input));
+});
+
+function handleSubmitButton(evt) {
+  evt.preventDefault();
+}
+
+userForm.addEventListener('submit', handleSubmitButton);
+
 
 // функция которая будет размещать карточки
 function createCardElement(cardData) {
@@ -185,6 +189,7 @@ function handleEsc(evt) {
     closePopup(popupOpenImage);
   };
 }
+
 //функция на лайк
 function likeImage(evt) {
   evt.target.classList.toggle('element__button-like_active');

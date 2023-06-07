@@ -19,15 +19,14 @@ const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
 
 const profileCreateButton = document.querySelector('.profile-create'); // кнопка сохранить
-const cardCreateButton = document.querySelector('.card-create');// кнопка создать
-
 const formCard = document.querySelector('.form__profile');
 const profileFormTitle = document.querySelector('.form__profile-input-title');
 const profileFormSubtitle = document.querySelector('.form__profile-input-subtitle');
 
 const cardForm = document.querySelector('.form__card');
-const cardTitleInput = cardForm.querySelector('.form__card-input-title');
-const cardSubtitleInput = cardForm.querySelector('.form__card-input-subtitle');
+const cardTitleInput = document.querySelector('.form__card-input-title');
+const cardSubtitleInput = document.querySelector('.form__card-input-subtitle');
+const cardCreateButton = document.querySelector('.card-create');
 
 const cardTemplate = document.getElementById('card-template').content.querySelector('.element'); // шаблон
 
@@ -61,12 +60,12 @@ const cardsImage = [
 
 // открытие попапа
 function openPopup(popup) {
-  popup.classList.add('popup_opened');
+  popup.classList.add('popup__opened');
 }
 
 // закрытие попапа
 function closePopup(popup) {
-  popup.classList.remove('popup_opened');
+  popup.classList.remove('popup__opened');
 }
 
 // функция для редактирования данных профиля
@@ -81,7 +80,6 @@ function handleFormSubmit(evt) {
 
   closePopup(profileWindow);
 }
-
 const userForm = document.forms.profilecontent;
 const userNameFiled = userForm.formprofile;
 
@@ -150,21 +148,21 @@ cardsImage.forEach(function(cardData) {
   container.prepend(newCard);
 });
 
-// добавление новой карточки
+// функция создания новой карточки
 function handleNewCard(evt) {
   evt.preventDefault();
-
+  
   const newCardData = {
     name: cardTitleInput.value,
     link: cardSubtitleInput.value
   };
+  
   const newCard = createCardElement(newCardData);
   container.prepend(newCard);
   cardForm.reset();
 
   closePopup(cardWindow);
 }
-
 
 //функция на открытие изобрыжения
 function handleOpenImage(container, popupOpenImage) {
@@ -187,7 +185,6 @@ function handleEsc(evt) {
     closePopup(popupOpenImage);
   };
 }
-
 //функция на лайк
 function likeImage(evt) {
   evt.target.classList.toggle('element__button-like_active');
@@ -231,6 +228,12 @@ profileWindow.addEventListener('submit', handleFormSubmit);
 document.addEventListener('keydown', handleEsc);
 
 // слушатель для закрытия OVERLAY
-popupOpenImage.addEventListener('click', handleOverlay);
+popupOpenImage.addEventListener('click', handleOverlay); 
+
+
+
+
+
+
 
 

@@ -100,7 +100,7 @@ function hideError(input) {
 
 // проверка валидации
 function checkValid(input) {
-  if (input.validity.valid) {
+  if (!input.validity.valid) {
     hideError(input);
   } else {
     showErorr(input, input.validationMessage);
@@ -171,7 +171,7 @@ function handleNewCard(evt) {
 //функция на открытие изобрыжения
 function handleOpenImage(container, popupOpenImage) {
   popupImage.src = container.querySelector('.element__list-item').src;
-  popupImageTitle.textContent = container.querySelector('.element__title').text;
+  popupImageTitle.textContent = container.querySelector('.element__title').textContent;
   
   openPopup(popupOpenImage);
 }

@@ -11,3 +11,9 @@
 .form__input:focus {
     outline-color: rgba(0, 0, 0);
 }
+.form__input:valid {
+    border: 1px solid green;
+}
+.form__input:invalid {
+    border: 1px solid red;
+}

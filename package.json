@@ -4,6 +4,9 @@
   "description": "Одностраничный, адаптивный сайт, который создан с использованием HTML, CSS, Webpack и JavaScript.  \r Реализован по правилам flexbox, grid, используется CSS анимация, медиазапросы, подключены шрифты. Форма редактирования профиля на JavaScript.   Файловая структура организована по Nested БЭМ.",
   "main": "babel.config.js",
   "devDependencies": {
+    "@babel/core": "^7.22.5",
+    "@babel/preset-env": "^7.22.5",
+    "babel-loader": "^9.1.2",
     "webpack": "^5.86.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1"
@@ -21,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/Nailusha/mesto-project-bootcamp/issues"
   },
-  "homepage": "https://github.com/Nailusha/mesto-project-bootcamp#readme"
+  "homepage": "https://github.com/Nailusha/mesto-project-bootcamp#readme",
+  "dependencies": {
+    "core-js": "^3.31.0"
+  }
 }

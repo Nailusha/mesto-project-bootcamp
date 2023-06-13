@@ -1,6 +1,5 @@
-import { openPopup, closePopup, handleEsc, handleOverlay } from "../components/modal.js";
-import { createCardElement, handleOpenImage, likeImage, deleteImage,} from "../components/card.js";
-
+import { openPopup, closePopup, handleEsc, handleOverlay } from "./components/modal.js";
+import { createCardElement, handleOpenImage, likeImage, deleteImage,} from "./components/card.js";
 
 const cardWindow = document.querySelector('.popup__card'); // окно создания карточки
 const profileWindow = document.querySelector('.popup__profile'); // окно профиля

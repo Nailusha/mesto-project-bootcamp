@@ -4,16 +4,16 @@ import './pages/index.css'; // добавьте импорт главного ф
 const cardWindow = document.querySelector('.popup__card'); // окно создания карточки
 const profileWindow = document.querySelector('.popup__profile'); // окно профиля
 
+const userForm = document.getElementById('user-name');
+
 const popupGlobal = document.querySelectorAll('.popup');
 const popupContainer = document.querySelectorAll('.popup__container');
+
 const popupOpenImage = document.querySelector('.popup__open-image');
 
 const profileCloseBtn = profileWindow.querySelector('.popup__button-closed');
 const cardCloseBtn = cardWindow.querySelector('.popup__button-closed');
 const imageCloseBtn = popupOpenImage.querySelector('.popup__button-closed');
-
-const popupImage = document.querySelector('.popup__image');
-const popupImageTitle = document.querySelector('.popup__title');
 
 const buttonEdit = document.querySelector('.profile__button-edit'); // кнопка редактирования профиля
 const buttonAdd = document.querySelector('.profile__button-add'); //кнопка создания карточек
@@ -31,16 +31,14 @@ const cardTitleInput = document.querySelector('.form__card-input-title');
 const cardSubtitleInput = document.querySelector('.form__card-input-subtitle');
 const cardCreateButton = document.querySelector('.card-create');
 
-const cardTemplate = document.getElementById('card-template').content.querySelector('.element'); // шаблон
-
 const container = document.querySelector('.elements__list');
 
-const arkhyzImage = new URL('https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg', import.meta.url);
-const chelyabinskImage = new Url('https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg', import.meta.url);
-const ivanovoImage = new Url('https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg', import.meta.url);
-const kamchatkaImage = new Url('https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg', import.meta.url);
-const kholmogorskyImage = new Url('https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg', import.meta.url);
-const baikalImage = new Url('https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg', import.meta.url);
+const arkhyzImage = 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg';
+const chelyabinskImage = 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg';
+const ivanovoImage = 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg';
+const kamchatkaImage = 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg';
+const kholmogorskyImage = 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg';
+const baikalImage = 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg';
 
 const cardsImage = [
   {
@@ -76,12 +74,8 @@ import {
   handleEsc, 
   handleOverlay 
 } from "./components/modal.js";
-import { 
-  createCardElement, 
-  handleOpenImage, 
-  likeImage, 
-  deleteImage
-} from "./components/card.js";
+
+import { createCardElement } from "./components/card.js";
 
 
 // функция для редактирования данных профиля
@@ -95,13 +89,7 @@ function handleFormSubmit(evt) {
   profileSubtitle.textContent = subtitleValue;
 
   closePopup(profileWindow);
-}
-
-function createCard(name) {
-  const newCard = createCardElement(name, handleNewCard)
-  return newCard;
-
-}
+};
 
 // функция создания новой карточки
 function handleNewCard(evt) {
@@ -117,14 +105,20 @@ function handleNewCard(evt) {
   cardForm.reset();
 
   closePopup(cardWindow);
-}
+};
+
+function createCard(cardData) {
+  const newCard = createCardElement(cardData, handleNewCard)
+  return newCard;
+
+};
 
 cardsImage.forEach(function(cardData) {
   const newCard = createCard(cardData);
   container.prepend(newCard);
 });
 
-  // слушатели на открытие окон
+// слушатели на открытие окон
   buttonEdit.addEventListener('click', () =>
   openPopup(profileWindow)
   );

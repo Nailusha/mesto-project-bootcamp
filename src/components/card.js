@@ -1,5 +1,12 @@
 // функционал для создания разметки карточки
 
+import { openPopup } from "./modal.js"; 
+
+const cardTemplate = document.getElementById('card-template').content.querySelector('.element'); // шаблон
+
+const popupImage = document.querySelector('.popup__image');
+const popupImageTitle = document.querySelector('.popup__title');
+
 // функция, которая будет размещать карточки
 function createCardElement(cardData) {
     const cardClone = cardTemplate.cloneNode(true); // клон с помощью template
@@ -29,12 +36,14 @@ function createCardElement(cardData) {
   }
   
 // функция на открытие изображения
-  function handleOpenImage(container, popupOpenImage) {
-  popupImage.src = container.querySelector('.element__list-item').src;
-  popupImageTitle.textContent = container.querySelector('.element__title').textContent;
+  function handleOpenImage(cardTemplate, popupImage) {
+  popupImage.src = cardTemplate.querySelector('.element__list-item').src;
+  popupImageTitle.textContent = cardTemplate.querySelector('.element__title').textContent;
+  popupImage.alt = popupImageTitle.textContent;
 
-  openPopup(popupOpenImage);
+  openPopup();
 }
+
 // функция на лайк
     function likeImage(evt) {
     evt.target.classList.toggle('element__button-like_active');
@@ -47,8 +56,5 @@ function createCardElement(cardData) {
 
   export {
     createCardElement,
-    handleOpenImage,
-    likeImage,
-    deleteImage,
   };
 

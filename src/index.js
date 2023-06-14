@@ -34,30 +34,38 @@ const cardCreateButton = document.querySelector('.card-create');
 const cardTemplate = document.getElementById('card-template').content.querySelector('.element'); // шаблон
 
 const container = document.querySelector('.elements__list');
+
+const arkhyzImage = new URL('https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg', import.meta.url);
+const chelyabinskImage = new Url('https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg', import.meta.url);
+const ivanovoImage = new Url('https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg', import.meta.url);
+const kamchatkaImage = new Url('https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg', import.meta.url);
+const kholmogorskyImage = new Url('https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg', import.meta.url);
+const baikalImage = new Url('https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg', import.meta.url);
+
 const cardsImage = [
   {
     name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    link: arkhyzImage
   },
   {
     name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+    link: chelyabinskImage
   },
   {
     name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    link: ivanovoImage
   },
   {
     name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    link: kamchatkaImage
   },
   {
     name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    link: kholmogorskyImage
   },
   {
     name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    link: baikalImage
   }
 ];
 

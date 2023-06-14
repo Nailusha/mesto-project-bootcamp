@@ -2,7 +2,7 @@
   "name": "mestro-project-booycamp",
   "version": "1.0.0",
   "description": "Одностраничный, адаптивный сайт, который создан с использованием HTML, CSS, Webpack и JavaScript.  \r Реализован по правилам flexbox, grid, используется CSS анимация, медиазапросы, подключены шрифты. Форма редактирования профиля на JavaScript.   Файловая структура организована по Nested БЭМ.",
-  "main": "babel.config.js",
+  "main": "index.js",
   "devDependencies": {
     "@babel/core": "^7.22.5",
     "@babel/preset-env": "^7.22.5",

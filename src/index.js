@@ -1,5 +1,5 @@
 // index.js
-import '../src/pages/index.css'; // добавьте импорт главного файла стилей
+import './pages/index.css'; // добавьте импорт главного файла стилей
 
 const cardWindow = document.querySelector('.popup__card'); // окно создания карточки
 const profileWindow = document.querySelector('.popup__profile'); // окно профиля

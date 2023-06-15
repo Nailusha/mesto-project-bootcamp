@@ -3,7 +3,7 @@ import './pages/index.css'; // добавьте импорт главного ф
 
 import { openPopup, closePopup, handleEsc, handleOverlay } from "./components/modal.js";
 import { createCardElement } from "./components/card.js";
-import { handleButtonDisable } from "./components/validation.js";
+import { disableButton } from "./components/validation.js";
 
 export const popupOpenImage = document.querySelector('.popup__open-image');
 
@@ -75,40 +75,34 @@ link: baikalImage
 function handleFormSubmit(evt) {
 evt.preventDefault();
 
-const titleValue = profileFormTitle.value;
-const subtitleValue = profileFormSubtitle.value;
-
-profileTitle.textContent = titleValue;
-profileSubtitle.textContent = subtitleValue;
+profileTitle.textContent = profileFormTitle.value;
+profileSubtitle.textContent = profileFormSubtitle.value; 
 
 closePopup(profileWindow);
 };
 
 // функция создания новой карточки
 function handleNewCard(evt) {
-evt.preventDefault();
+  evt.preventDefault();
 
-const newCardData = {
-name: cardTitleInput.value,
-link: cardSubtitleInput.value
-};
+  const newCardData = {
+    name: cardTitleInput.value,
+    link: cardSubtitleInput.value
+  };
 
-const newCard = createCard(newCardData);
-container.prepend(newCard);
-cardForm.reset();
+  const newCard = createCardElement(newCardData); // Создаем карточку напрямую
+  container.prepend(newCard);
+  cardForm.reset();
 
-closePopup(cardWindow);
-};
+  disableButton(evt.submitter);
 
-function createCard(cardData) {
-const newCard = createCardElement(cardData, handleNewCard);
-return newCard;
-};
+  closePopup(cardWindow);
+}
 
 // добавление карточки в начало
 cardsImage.forEach(function (cardData) {
-const newCard = createCard(cardData);
-container.prepend(newCard);
+  const newCard = createCardElement(cardData); // Создаем карточку напрямую
+  container.prepend(newCard);
 });
 
 // слушатели на открытие окон
@@ -116,10 +110,10 @@ buttonEdit.addEventListener('click', () => openPopup(profileWindow));
 buttonAdd.addEventListener('click', () => openPopup(cardWindow));
 
 // слушатели нажатия на крестик
-profileCloseBtn.addEventListener('click', () => closePopup(profileWindow));
-cardCloseBtn.addEventListener('click', () => closePopup(cardWindow));
-imageCloseBtn.addEventListener('click', () => closePopup(popupOpenImage));
-
+document.querySelectorAll('.popup__button-closed').forEach(button => {
+  const buttonsPopup = button.closest('.popup'); // нашли родителя с нужным классом
+  button.addEventListener('click', () => closePopup(buttonsPopup)); // закрыли попап
+}); 
 // слушатели на закрытие попапа при клике на OVERLAY
 popupGlobal.forEach(popup => {
 popup.addEventListener('click', handleOverlay);
@@ -133,6 +127,3 @@ userForm.addEventListener('submit', handleFormSubmit);
 
 // слушатель на отправку формы карточки
 cardForm.addEventListener('submit', handleNewCard);
-
-// слушатель на включение валидации
-userForm.addEventListener('submit', handleButtonDisable);

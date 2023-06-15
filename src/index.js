@@ -15,7 +15,6 @@ const profileWindow = document.querySelector('.popup__profile'); // окно п�
 const popupGlobal = document.querySelectorAll('.popup');
 const popupContainer = document.querySelectorAll('.popup__container');
 
-
 const profileCloseBtn = profileWindow.querySelector('.popup__button-closed');
 const cardCloseBtn = cardWindow.querySelector('.popup__button-closed');
 const imageCloseBtn = popupOpenImage.querySelector('.popup__button-closed');
@@ -46,100 +45,84 @@ const kholmogorskyImage = 'https://pictures.s3.yandex.net/frontend-developer/car
 const baikalImage = 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg';
 
 const cardsImage = [
-  {
-    name: 'Архыз',
-    link: arkhyzImage
-  },
-  {
-    name: 'Челябинская область',
-    link: chelyabinskImage
-  },
-  {
-    name: 'Иваново',
-    link: ivanovoImage
-  },
-  {
-    name: 'Камчатка',
-    link: kamchatkaImage
-  },
-  {
-    name: 'Холмогорский район',
-    link: kholmogorskyImage
-  },
-  {
-    name: 'Байкал',
-    link: baikalImage
-  }
+{
+name: 'Архыз',
+link: arkhyzImage
+},
+{
+name: 'Челябинская область',
+link: chelyabinskImage
+},
+{
+name: 'Иваново',
+link: ivanovoImage
+},
+{
+name: 'Камчатка',
+link: kamchatkaImage
+},
+{
+name: 'Холмогорский район',
+link: kholmogorskyImage
+},
+{
+name: 'Байкал',
+link: baikalImage
+}
 ];
 
 // функция для редактирования данных профиля
 function handleFormSubmit(evt) {
-  evt.preventDefault();
+evt.preventDefault();
 
-  const titleValue = userForm.elements.profileFormTitle.value;
-  const subtitleValue = userForm.elements.profileFormSubtitle.value;
+const titleValue = profileFormTitle.value;
+const subtitleValue = profileFormSubtitle.value;
 
-  profileTitle.textContent = titleValue;
-  profileSubtitle.textContent = subtitleValue;
+profileTitle.textContent = titleValue;
+profileSubtitle.textContent = subtitleValue;
 
-  closePopup(profileWindow);
+closePopup(profileWindow);
 };
 
 // функция создания новой карточки
 function handleNewCard(evt) {
-  evt.preventDefault();
+evt.preventDefault();
 
-  const newCardData = {
-    name: cardTitleInput.value,
-    link: cardSubtitleInput.value
-  };
-
-  const newCard = createCard(newCardData);
-  container.prepend(newCard);
-  cardForm.reset();
-
-  closePopup(cardWindow);
+const newCardData = {
+name: cardTitleInput.value,
+link: cardSubtitleInput.value
 };
 
+const newCard = createCard(newCardData);
+container.prepend(newCard);
+cardForm.reset();
+
+closePopup(cardWindow);
+};
 
 function createCard(cardData) {
-  const newCard = createCardElement(cardData, handleNewCard)
-  return newCard;
-
+const newCard = createCardElement(cardData, handleNewCard);
+return newCard;
 };
 
-//добавление карточки в начало
+// добавление карточки в начало
 cardsImage.forEach(function (cardData) {
-  const newCard = createCard(cardData);
-  container.prepend(newCard);
+const newCard = createCard(cardData);
+container.prepend(newCard);
 });
 
 // слушатели на открытие окон
-buttonEdit.addEventListener('click', () =>
-  openPopup(profileWindow)
-);
-
-buttonAdd.addEventListener('click', () =>
-  openPopup(cardWindow)
-);
-
+buttonEdit.addEventListener('click', () => openPopup(profileWindow));
+buttonAdd.addEventListener('click', () => openPopup(cardWindow));
 
 // слушатели нажатия на крестик
-profileCloseBtn.addEventListener('click', () =>
-  closePopup(profileWindow)
-);
-
-cardCloseBtn.addEventListener('click', () =>
-  closePopup(cardWindow)
-);
-
-imageCloseBtn.addEventListener('click', () =>
-  closePopup(popupOpenImage)
-);
+profileCloseBtn.addEventListener('click', () => closePopup(profileWindow));
+cardCloseBtn.addEventListener('click', () => closePopup(cardWindow));
+imageCloseBtn.addEventListener('click', () => closePopup(popupOpenImage));
 
 // слушатели на закрытие попапа при клике на OVERLAY
 popupGlobal.forEach(popup => {
-  popup.addEventListener('click', handleOverlay);
+popup.addEventListener('click', handleOverlay);
 });
 
 // слушатель на закрытие попапа при нажатии ESC

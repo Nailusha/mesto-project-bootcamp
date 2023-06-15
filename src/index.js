@@ -3,9 +3,11 @@ import './pages/index.css'; // добавьте импорт главного ф
 
 import { openPopup, closePopup, handleEsc, handleOverlay } from "./components/modal.js";
 import { createCardElement } from "./components/card.js";
-import { userForm, handleButtonDisable } from "./components/validation.js";
+import { handleButtonDisable } from "./components/validation.js";
 
 export const popupOpenImage = document.querySelector('.popup__open-image');
+
+const userForm = document.forms.profilecontent;
 
 const cardWindow = document.querySelector('.popup__card'); // окно создания карточки
 const profileWindow = document.querySelector('.popup__profile'); // окно профиля

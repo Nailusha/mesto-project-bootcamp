@@ -1,34 +1,32 @@
 // Модуль валидации весь, как он дан в вашем тренажере и как мы его писали на вебинаре.
 
-export const userForm = document.forms.profilecontent;
-const userNameFiled = userForm.formprofile;
-
-//функция enableValidation ответственная за включение валидации всех форм
-const validityOptions = {
+const validitySettings = {
   formSelector: '.form',
   inputSelector: '.form__input',
   buttonSelector: '.form__submit-button',
-  inputErrorClass: 'form__input_error',
-};
+  inputErrorClass: 'form__input-text-invalid'
+}
 
-// показывает ошибку
-function showError(input, settings, errorText) {
+//показывает ошибку
+function showError(input, settings, errorMessage) {
   const spanId = `error-${input.id}`;
   const errorField = document.getElementById(spanId);
-  errorField.textContent = errorText;
   input.classList.add(settings.inputErrorClass);
+  errorField.textContent = errorMessage;
 }
 
-// скрывает ошибку
+
+//скрывает ошибку
 function hideError(input, settings) {
-  const spanId = `error-${input.id}`;
-  const errorField = document.getElementById(spanId);
-  errorField.textContent = "";
-  input.classList.remove(settings.inputErrorClass);
+    const spanId = `error-${input.id}`;
+    const errorFiled = document.getElementById(spanId);
+    input.classList.remove(settings.inputErrorClass);
+    errorFiled.textContent = '';
+
 }
 
-// проверка валидации
-function handleFormValidation(input, settings) {
+//проверка валидации
+function chekValid(input, settings) {
   if (input.validity.valid) {
     hideError(input, settings);
   } else {
@@ -36,51 +34,54 @@ function handleFormValidation(input, settings) {
   }
 }
 
-//функция включает и отключает кнопку сабмит события на основание валидности полей
-function buttonStatus(form, submitButton) {
+
+//проверка валидности всей формы
+function checkFormValidity(form, submitButton) {
   if (form.checkValidity()) {
-    // метод проверки валидности всей формы
     enableButton(submitButton);
   } else {
     disableButton(submitButton);
   }
 }
 
+
+//включение кнопки
 function enableButton(submitButton) {
   submitButton.disabled = false;
 }
 
+//выключение кнопки
 function disableButton(submitButton) {
   submitButton.disabled = true;
 }
 
+
 function setEventListeners(form, settings) {
-  const buttonSubmit = form.querySelector(settings.buttonSelector);
-  const inputList = form.querySelectorAll(settings.inputSelector);
-  buttonStatus(form, buttonSubmit);
-  inputList.forEach((input) => {
-    input.addEventListener("input", () => {
-      handleFormValidation(input, settings);
-      buttonStatus(form, buttonSubmit);
-    });
-  });
+  
+const inputList = form.querySelectorAll(settings.inputSelector);
+const submitButton = form.querySelector(settings.buttonSelector);
+checkFormValidity(submitButton);
+inputList.forEach(input => {
+  input.addEventListener('input', () => {
+    chekValid(input, settings)
+    checkFormValidity(submitButton);
+  })
+})
 }
 
-//функция перебора и подстановки форм в функци
 function enableValidation(settings) {
   const formList = document.querySelectorAll(settings.formSelector);
-  formList.forEach((form) => {
+  formList.forEach(form => { 
     setEventListeners(form, settings);
   });
 }
+
 
 //блокирует кнопку пори сабмите формы
 function handleButtonDisable(event) {
   disableButton(event.submitter);
 }
 
-//передаем настройки переменных функции валидации, чтобы работаь с переменными как с объекстами
-enableValidation(validityOptions);
+enableValidation(validitySettings);
 
-
-export { handleButtonDisable };
+export { handleButtonDisable }

@@ -15,3 +15,6 @@
 .form__submit-button:hover {
     opacity: .8;
 }
+.form__submit-button:disabled {
+    background-color: #7c7979;
+}

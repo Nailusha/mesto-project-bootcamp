@@ -23,7 +23,7 @@ function createCardElement(cardData) {
 
   // слушатель на открытие изображения
   cardImage.addEventListener('click', function () {
-    handleOpenImage(popupImage);
+    handleOpenImage(cardClone, popupImageTitle);
   });
 
   // слушатель на лайк
@@ -38,9 +38,9 @@ function createCardElement(cardData) {
 }
 
 // функция на открытие изображения
-function handleOpenImage(cardClone) {
-  const cardImage = cardClone.querySelector('.element__list-item');
-  const cardTitle = cardClone.querySelector('.element__title');
+function handleOpenImage(cardTemplate) {
+  const cardImage = cardTemplate.querySelector('.element__list-item');
+  const cardTitle = cardTemplate.querySelector('.element__title');
 
   popupImage.src = cardImage.src;
   popupImageTitle.textContent = cardTitle.textContent;

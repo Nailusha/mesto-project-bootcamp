@@ -3,7 +3,7 @@ import './pages/index.css'; // добавьте импорт главного ф
 
 import { openPopup, closePopup, handleEsc, handleOverlay } from "./components/modal.js";
 import { createCardElement } from "./components/card.js";
-import { userForm, handleSubmitButton } from "./components/validation.js";
+import { userForm, handleButtonDisable } from "./components/validation.js";
 
 export const popupOpenImage = document.querySelector('.popup__open-image');
 
@@ -150,4 +150,4 @@ userForm.addEventListener('submit', handleFormSubmit);
 cardForm.addEventListener('submit', handleNewCard);
 
 // слушатель на включение валидации
-userForm.addEventListener('submit', handleSubmitButton);
+userForm.addEventListener('submit', handleButtonDisable);

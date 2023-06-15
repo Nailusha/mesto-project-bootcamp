@@ -1,15 +1,18 @@
 // index.js
 import './pages/index.css'; // добавьте импорт главного файла стилей
 
+import { openPopup, closePopup, handleEsc, handleOverlay } from "./components/modal.js";
+import { createCardElement } from "./components/card.js";
+import { userForm, handleSubmitButton } from "./components/validation.js";
+
+export const popupOpenImage = document.querySelector('.popup__open-image');
+
 const cardWindow = document.querySelector('.popup__card'); // окно создания карточки
 const profileWindow = document.querySelector('.popup__profile'); // окно профиля
-
-const userForm = document.getElementById('user-name');
 
 const popupGlobal = document.querySelectorAll('.popup');
 const popupContainer = document.querySelectorAll('.popup__container');
 
-const popupOpenImage = document.querySelector('.popup__open-image');
 
 const profileCloseBtn = profileWindow.querySelector('.popup__button-closed');
 const cardCloseBtn = cardWindow.querySelector('.popup__button-closed');
@@ -22,7 +25,7 @@ const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
 
 const profileCreateButton = document.querySelector('.profile-create'); // кнопка сохранить
-const formCard = document.querySelector('.form__profile');
+const formProfile = document.querySelector('.form__profile');
 const profileFormTitle = document.querySelector('.form__profile-input-title');
 const profileFormSubtitle = document.querySelector('.form__profile-input-subtitle');
 
@@ -67,17 +70,6 @@ const cardsImage = [
   }
 ];
 
-// импорт модулей
-import { 
-  openPopup, 
-  closePopup, 
-  handleEsc, 
-  handleOverlay 
-} from "./components/modal.js";
-
-import { createCardElement } from "./components/card.js";
-
-
 // функция для редактирования данных профиля
 function handleFormSubmit(evt) {
   evt.preventDefault();
@@ -107,26 +99,28 @@ function handleNewCard(evt) {
   closePopup(cardWindow);
 };
 
+
 function createCard(cardData) {
   const newCard = createCardElement(cardData, handleNewCard)
   return newCard;
 
 };
 
-cardsImage.forEach(function(cardData) {
+//добавление карточки в начало
+cardsImage.forEach(function (cardData) {
   const newCard = createCard(cardData);
   container.prepend(newCard);
 });
 
 // слушатели на открытие окон
-  buttonEdit.addEventListener('click', () =>
+buttonEdit.addEventListener('click', () =>
   openPopup(profileWindow)
-  );
-  
-  buttonAdd.addEventListener('click', () =>
+);
+
+buttonAdd.addEventListener('click', () =>
   openPopup(cardWindow)
-  );
-  
+);
+
 
 // слушатели нажатия на крестик
 profileCloseBtn.addEventListener('click', () =>
@@ -155,3 +149,5 @@ userForm.addEventListener('submit', handleFormSubmit);
 // слушатель на отправку формы карточки
 cardForm.addEventListener('submit', handleNewCard);
 
+// слушатель на включение валидации
+userForm.addEventListener('submit', handleSubmitButton);

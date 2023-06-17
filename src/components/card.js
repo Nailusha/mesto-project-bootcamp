@@ -36,7 +36,7 @@ function createCardElement(cardData, userId) {
       .catch((err) => console.log(err));
   }
 
-  likeImage(cardData.likes || [], userId, likeButton, likeCounter);
+  likeImage(cardData.likes, userId, likeButton, likeCounter);
 
   if (cardData.owner._id !== userId) {
     deleteButton.remove();

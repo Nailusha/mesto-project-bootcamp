@@ -43,13 +43,6 @@ const fotoForm = document.querySelector('.form__avatar');
 
 const container = document.querySelector('.elements__list');
 
-const arkhyzImage = 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg';
-const chelyabinskImage = 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg';
-const ivanovoImage = 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg';
-const kamchatkaImage = 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg';
-const kholmogorskyImage = 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg';
-const baikalImage = 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg';
-
 // функция для редактирования данных профиля
 function handleFormSubmit(evt) {
   evt.preventDefault();
@@ -62,11 +55,19 @@ function handleFormSubmit(evt) {
 // функция создания новой карточки
 function handleNewCard(evt) {
   evt.preventDefault();
-  const newCardElement = createCardElement(cardData, userId);
-  setCard(newCardElement.value)
+  
+  const cardData = {
+    name: cardTitleInput.value,
+    link: cardSubtitleInput.value,
+    owner: {
+      _id: userId
+    }
+  };
+
+  setCard(cardData.name, cardData.link)
     .then(res => {
-      const newCard = (res);
-      container.append(newCard)
+      const newCardElement = createCardElement(res, userId);
+      container.append(newCardElement);
       cardForm.reset();
 
       disableButton(evt.submitter);
@@ -77,6 +78,7 @@ function handleNewCard(evt) {
       console.log(error);
     });
 }
+
 
 //обновление аватар
 function handleFotoCard() {

@@ -14,14 +14,14 @@ function checkResponse(res) {
     return Promise.reject(`Ошибка: ${res.status}`);
 }
 
-/*информация о пользователе c сервера*/
+//информация о пользователе c сервера
 export function getUserInformation() {
     return fetch(`${config.baseUrl}/users/me`, {
         headers: config.headers,
     }).then(checkResponse);
 }
 
-/*отправка информация о пользователе на сервер*/
+//отправка информация о пользователе на сервер
 export function setUserInformation(about, name) {
     return fetch(`${config.baseUrl}/users/me`, {
         headers: config.headers,
@@ -33,7 +33,7 @@ export function setUserInformation(about, name) {
     }).then(checkResponse);
 }
 
-//функция отвечает только за отправку/получения данных
+//функция отвечает только за отправку и получения данных
 export function getCards() {
     return fetch(`${config.baseUrl}/cards`, {
         headers: config.headers,
@@ -41,18 +41,19 @@ export function getCards() {
 }
 
 //запрос на добавление карточек
-export function setCard(url, name) {
+export function setCard(name, url) {
+    console.log(name, url);
     return fetch(`${config.baseUrl}/cards`, {
         headers: config.headers,
         method: "POST",
         body: JSON.stringify({
-            link: url,
             name: name,
+            link: url,
         }),
     }).then(checkResponse);
 }
 
-/*запрос на удаление карточки*/
+//запрос на удаление карточки
 export function deleteCard(userId) {
     return fetch(`${config.baseUrl}/cards/${userId}`, {
         method: "DELETE",
@@ -60,7 +61,7 @@ export function deleteCard(userId) {
     }).then(checkResponse);
 }
 
-/*Запрос на удaление лайков*/
+//Запрос на удaление лайков
 export function deleteLike(cardId) {
     return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
         method: "DELETE",
@@ -68,7 +69,7 @@ export function deleteLike(cardId) {
     }).then(checkResponse);
 }
 
-/*Запрос на добавление лайков*/
+//Запрос на добавление лайков
 export function setLike(cardId) {
     return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
         method: "PUT",
@@ -76,7 +77,7 @@ export function setLike(cardId) {
     }).then(checkResponse);
 }
 
-/*запрос на загрузку аватара на сервер*/
+//запрос на загрузку аватара на сервер
 export function setUserAvatar(url) {
     return fetch(`${config.baseUrl}/users/me/avatar`, {
         method: "PATCH",

@@ -125,7 +125,10 @@
         <section class="popup popup__avatar">
           <div class="popup__container">
             <button class="popup__button-closed" type="button"></button>
-            <form class="form form__avatar" name="avatarprofile" novalidate>
+            <form class="form form__avatar" 
+                method="POST"
+                name="avatarprofile"
+                novalidate>
               <h2 class="form__title">Обновить аватар</h2>
                 <fieldset class="form__input-container">
                   <input 
@@ -134,8 +137,9 @@
                   name="profileavatar"
                   type="url"
                   placeholder="Ссылка на изображение"
+                  required
                   >
-                  <span class="form__input_error"></span>
+                  <span class="form__input_error" id="error-profileavatar"></span>
                 </fieldset>
                 <button
                   class="form__input form__submit-button"
@@ -173,6 +177,7 @@
               class="element__button-like element__button-like_active"
               type="button"
             ></button>
+            <span class="element__like-count"></span>
           </div>
         </li>
       </ul>

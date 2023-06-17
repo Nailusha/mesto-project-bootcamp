@@ -5,8 +5,15 @@ import { openPopup, closePopup, handleEsc, handleOverlay } from "./components/mo
 import { createCardElement } from "./components/card.js";
 import { disableButton } from "./components/validation.js";
 
+import { getCards } from "./components/api.js"; //функция отвечает только за отправку/получения данных
+import { setCard } from "./components/api.js"; //запрос на добавление карточек
+import { getUserInformation } from "./components/api.js"; //информация о пользователе c сервера
+import { setUserInformation } from "./components/api.js";//отправка информация о пользователе на сервер
+import { setUserAvatar } from "./components/api.js"; //запрос на загрузку аватара на сервер
+
 export const popupOpenImage = document.querySelector('.popup__open-image');
 
+export let userId;
 const userForm = document.forms.profilecontent;
 
 const cardWindow = document.querySelector('.popup__card'); // окно создания карточки
@@ -32,6 +39,8 @@ const cardTitleInput = document.querySelector('.form__card-input-title');
 const cardSubtitleInput = document.querySelector('.form__card-input-subtitle');
 const cardCreateButton = document.querySelector('.card-create');
 
+const fotoForm = document.querySelector('.form__avatar');
+
 const container = document.querySelector('.elements__list');
 
 const arkhyzImage = 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg';
@@ -41,72 +50,63 @@ const kamchatkaImage = 'https://pictures.s3.yandex.net/frontend-developer/cards-
 const kholmogorskyImage = 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg';
 const baikalImage = 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg';
 
-const cardsImage = [
-{
-name: 'Архыз',
-link: arkhyzImage
-},
-{
-name: 'Челябинская область',
-link: chelyabinskImage
-},
-{
-name: 'Иваново',
-link: ivanovoImage
-},
-{
-name: 'Камчатка',
-link: kamchatkaImage
-},
-{
-name: 'Холмогорский район',
-link: kholmogorskyImage
-},
-{
-name: 'Байкал',
-link: baikalImage
-}
-];
-
 // функция для редактирования данных профиля
 function handleFormSubmit(evt) {
-evt.preventDefault();
+  evt.preventDefault();
+  profileTitle.textContent = profileFormTitle.value;
+  profileSubtitle.textContent = profileFormSubtitle.value;
 
-profileTitle.textContent = profileFormTitle.value;
-profileSubtitle.textContent = profileFormSubtitle.value; 
-
-closePopup(profileWindow);
+  closePopup(profileWindow);
 };
 
 // функция создания новой карточки
 function handleNewCard(evt) {
   evt.preventDefault();
+  const newCardElement = createCardElement(cardData, userId);
+  setCard(newCardElement.value)
+    .then(res => {
+      const newCard = (res);
+      container.append(newCard)
+      cardForm.reset();
 
-  const newCardData = {
-    name: cardTitleInput.value,
-    link: cardSubtitleInput.value
-  };
+      disableButton(evt.submitter);
 
-  const newCard = createCardElement(newCardData); // Создаем карточку напрямую
-  container.prepend(newCard);
-  cardForm.reset();
-
-  disableButton(evt.submitter);
-
-  closePopup(cardWindow);
+      closePopup(cardWindow);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }
-
-// добавление карточки в начало
-cardsImage.forEach(function (cardData) {
-  const newCard = createCardElement(cardData); // Создаем карточку напрямую
-  container.prepend(newCard);
-});
 
 //обновление аватар
 function handleFotoCard() {
+  const input = document.getElementById('profileavatar');
+  const image = document.querySelector('.profile__avatar');
 
+  input.addEventListener('input', function () {
+    const url = input.value;
+    // Проверяем, является ли введенное значение URL-адресом изображения
+    if (disableButton(url)) {
+      image.src = url; // Изменяем src изображения на введенный URL
+    }
+  });
 }
 
+Promise.all([getCards(), getUserInformation()])
+  .then(([allCards, userData]) => {
+    userId = userData._id;
+    profileTitle.textContent = userData.name;
+    profileSubtitle.textContent = userData.about;
+    avatarWindow.src = userData.avatar;
+
+    allCards.forEach(cardData => {
+      const newCardElement = createCardElement(cardData, userId);
+      container.append(newCardElement);
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 // слушатели на открытие окон
 buttonEdit.addEventListener('click', () => openPopup(profileWindow));
@@ -117,17 +117,17 @@ buttonAvat.addEventListener('click', () => openPopup(avatarWindow));
 document.querySelectorAll('.popup__button-closed').forEach(button => {
   const buttonsPopup = button.closest('.popup'); // нашли родителя с нужным классом
   button.addEventListener('click', () => closePopup(buttonsPopup)); // закрыли попап
-}); 
+});
+
 // слушатели на закрытие попапа при клике на OVERLAY
 popupGlobal.forEach(popup => {
-popup.addEventListener('click', handleOverlay);
+  popup.addEventListener('click', handleOverlay);
 });
 
 // слушатель на закрытие попапа при нажатии ESC
 document.addEventListener('keydown', handleEsc);
 
-// слушатель на отправку формы профиля
+// слушатель на сабмит форм
 userForm.addEventListener('submit', handleFormSubmit);
-
-// слушатель на отправку формы карточки
 cardForm.addEventListener('submit', handleNewCard);
+fotoForm.addEventListener('submit', handleFotoCard);

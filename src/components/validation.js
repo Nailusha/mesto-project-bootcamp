@@ -77,9 +77,7 @@ function enableValidation(settings) {
 }
 
 function handleButtonDisable(event) {
-
   disableButton(event.target);
-
 }
 
 enableValidation(validitySettings);

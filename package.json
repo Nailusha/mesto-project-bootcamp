@@ -36,6 +36,7 @@
   },
   "homepage": "https://github.com/Nailusha/mesto-project-bootcamp#readme",
   "dependencies": {
-    "core-js": "^3.31.0"
+    "core-js": "^3.31.0",
+    "json-server": "^0.17.3"
   }
 }

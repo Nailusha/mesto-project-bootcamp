@@ -11,14 +11,11 @@ const userForm = document.forms.profilecontent;
 
 const cardWindow = document.querySelector('.popup__card'); // окно создания карточки
 const profileWindow = document.querySelector('.popup__profile'); // окно профиля
+const avatarWindow = document.querySelector('.popup__avatar'); // окно аватарки
 
 const popupGlobal = document.querySelectorAll('.popup');
-const popupContainer = document.querySelectorAll('.popup__container');
 
-const profileCloseBtn = profileWindow.querySelector('.popup__button-closed');
-const cardCloseBtn = cardWindow.querySelector('.popup__button-closed');
-const imageCloseBtn = popupOpenImage.querySelector('.popup__button-closed');
-
+const buttonAvat = document.querySelector('.profile__avatar-button');
 const buttonEdit = document.querySelector('.profile__button-edit'); // кнопка редактирования профиля
 const buttonAdd = document.querySelector('.profile__button-add'); //кнопка создания карточек
 
@@ -105,9 +102,16 @@ cardsImage.forEach(function (cardData) {
   container.prepend(newCard);
 });
 
+//обновление аватар
+function handleFotoCard() {
+
+}
+
+
 // слушатели на открытие окон
 buttonEdit.addEventListener('click', () => openPopup(profileWindow));
 buttonAdd.addEventListener('click', () => openPopup(cardWindow));
+buttonAvat.addEventListener('click', () => openPopup(avatarWindow));
 
 // слушатели нажатия на крестик
 document.querySelectorAll('.popup__button-closed').forEach(button => {

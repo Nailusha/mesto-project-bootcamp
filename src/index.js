@@ -26,18 +26,17 @@ const buttonAvat = document.querySelector('.profile__avatar-button');
 const buttonEdit = document.querySelector('.profile__button-edit'); // кнопка редактирования профиля
 const buttonAdd = document.querySelector('.profile__button-add'); //кнопка создания карточек
 
+const profileAvatar = document.querySelector('.profile__avatar');
+const inputAvatarSrc = document.querySelector('.form__input-avatar');
+
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
-
-const profileCreateButton = document.querySelector('.profile-create'); // кнопка сохранить
-const formProfile = document.querySelector('.form__profile');
-const profileFormTitle = document.querySelector('.form__profile-input-title');
-const profileFormSubtitle = document.querySelector('.form__profile-input-subtitle');
+const inputProfileTitle = document.querySelector('.form__profile-input-title');
+const inputProfileSubtitle = document.querySelector('.form__profile-input-subtitle');
 
 const cardForm = document.querySelector('.form__card');
 const cardTitleInput = document.querySelector('.form__card-input-title');
 const cardSubtitleInput = document.querySelector('.form__card-input-subtitle');
-const cardCreateButton = document.querySelector('.card-create');
 
 const fotoForm = document.querySelector('.form__avatar');
 
@@ -46,16 +45,28 @@ const container = document.querySelector('.elements__list');
 // функция для редактирования данных профиля
 function handleFormSubmit(evt) {
   evt.preventDefault();
-  profileTitle.textContent = profileFormTitle.value;
-  profileSubtitle.textContent = profileFormSubtitle.value;
+  evt.submitter.textContent = 'Сохранение...';
+  
+  setUserInformation(inputProfileSubtitle.value, inputProfileTitle.value)
+  .then((res) => {
+    profileSubtitle.textContent = res.about;
+    profileTitle.textContent = res.name;
+    
 
   closePopup(profileWindow);
+  })
+
+  .catch(e => console.log(e))
+    .finally(() => {
+        evt.submitter.textContent = 'Сохранить'
+    })
 };
 
 // функция создания новой карточки
 function handleNewCard(evt) {
   evt.preventDefault();
-  
+  evt.submitter.textContent = 'Сохранение...';
+
   const cardData = {
     name: cardTitleInput.value,
     link: cardSubtitleInput.value,
@@ -67,31 +78,36 @@ function handleNewCard(evt) {
   setCard(cardData.name, cardData.link)
     .then(res => {
       const newCardElement = createCardElement(res, userId);
-      container.append(newCardElement);
+      container.prepend(newCardElement);
       cardForm.reset();
 
       disableButton(evt.submitter);
 
       closePopup(cardWindow);
     })
-    .catch((error) => {
-      console.log(error);
-    });
+    .catch(e => console.log(e))
+
+    .finally(() => {
+        evt.submitter.textContent = 'Сохранить'
+    })
 }
 
 
 //обновление аватар
-function handleFotoCard() {
-  const input = document.getElementById('profileavatar');
-  const image = document.querySelector('.profile__avatar');
+function handleFotoCard(evt) {
+  evt.preventDefault();
+  evt.submitter.textContent = 'Сохранение...'
 
-  input.addEventListener('input', function () {
-    const url = input.value;
-    // Проверяем, является ли введенное значение URL-адресом изображения
-    if (disableButton(url)) {
-      image.src = url; // Изменяем src изображения на введенный URL
-    }
-  });
+  setUserAvatar(inputAvatarSrc.value)
+  .then((res) => {
+    profileAvatar.src = res.avatar;
+    closePopup(avatarWindow);            
+})
+  .catch(e => console.log(e))
+
+  .finally(() => {
+      evt.submitter.textContent = 'Сохранить'
+    })
 }
 
 Promise.all([getCards(), getUserInformation()])
@@ -109,6 +125,7 @@ Promise.all([getCards(), getUserInformation()])
   .catch((err) => {
     console.log(err);
   });
+
 
 // слушатели на открытие окон
 buttonEdit.addEventListener('click', () => openPopup(profileWindow));

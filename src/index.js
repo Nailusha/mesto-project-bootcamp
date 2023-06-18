@@ -1,7 +1,7 @@
 // index.js
 import './pages/index.css'; // добавьте импорт главного файла стилей
 
-import { openPopup, closePopup, handleEsc, handleOverlay } from "./components/modal.js";
+import { openPopup, closePopup } from "./components/modal.js";
 import { createCardElement } from "./components/card.js";
 import { disableButton } from "./components/validation.js";
 
@@ -20,12 +20,10 @@ const cardWindow = document.querySelector('.popup__card'); // окно созд�
 const profileWindow = document.querySelector('.popup__profile'); // окно профиля
 const avatarWindow = document.querySelector('.popup__avatar'); // окно аватарки
 
-export const popupGlobal = document.querySelectorAll('.popup');
 
 const buttonAvat = document.querySelector('.profile__avatar-button');
 const buttonEdit = document.querySelector('.profile__button-edit'); // кнопка редактирования профиля
 const buttonAdd = document.querySelector('.profile__button-add'); //кнопка создания карточек
-const buttonClose = document.querySelector('.popup__button-closed');
 
 const profileAvatar = document.querySelector('.profile__avatar');
 const inputAvatarSrc = document.querySelector('.form__input-avatar');
@@ -150,13 +148,6 @@ document.querySelectorAll('.popup__button-closed').forEach(button => {
   button.addEventListener('click', () => closePopup(buttonsPopup)); // закрыли попап
 });
 
-// слушатели на закрытие попапа при клике на OVERLAY
-popupGlobal.forEach(popup => {
-  popup.addEventListener('click', handleOverlay);
-});
-
-// слушатель на закрытие попапа при нажатии ESC
-document.addEventListener('keydown', handleEsc);
 
 // слушатель на сабмит форм
 userForm.addEventListener('submit', handleFormSubmit);

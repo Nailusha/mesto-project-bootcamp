@@ -1,6 +1,7 @@
 .element__description {
     display: flex;
-    justify-content: space-between;
+    justify-content:space-around;
+    align-items: center;
     background-color: #fff;
     border-radius: 0 0 10px 10px;
     position: relative;

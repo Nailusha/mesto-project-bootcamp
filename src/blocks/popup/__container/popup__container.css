@@ -1,6 +1,11 @@
 .popup__container {
-    display: flex;
-    flex-flow: column;
-    width: calc((100vw - 320px)/(1280 - 320) * (510 - 282) + 282px);
-    gap: calc((100vw - 320px)/(1280 - 320) * (8 - 16) + 16px);
+  position: relative;
+    display: block;
+    width: 100%;
+    max-width: 430px;
+    max-height: 330px;
+    background: white;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    align-items: center;  
 }

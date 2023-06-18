@@ -1,0 +1,6 @@
+.popup__container-open-image {
+    position: relative;
+    max-width: 75vw;
+    max-height: 75vw;
+    object-fit: contain;
+}

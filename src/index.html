@@ -18,7 +18,8 @@
 
       <main>
         <section class="profile">
-          <div>
+          <div class="profile__content">
+          <div class="profile__containet-avatar">
           <img
             class="profile__avatar"
             src="<%=require('./images/image.jpg')%>"
@@ -35,6 +36,7 @@
               <button class="profile__button-edit" id="button"></button>
             </div>
             <p class="profile__subtitle">Исследователь океана</p>
+            </div>
           </div>
           <button class="profile__button-add" id="button"></button>
         </section>
@@ -153,11 +155,9 @@
 
         <div class="popup popup__open-image">
           <div class="popup__container-open-image">
-            <button class="popup__button-closed" type="image"></button>
-            <figure class="popup__figure">
+            <button class="popup__button-closed" type="button"></button>
               <img class="popup__image" src="#" alt="Изображение карточки" />
               <figcaption class="popup__title"></figcaption>
-            </figure>
           </div>
         </div>
       </main>
@@ -174,11 +174,13 @@
           <img class="element__list-item" src="" alt="" />
           <div class="element__description">
             <h2 class="element__title"></h2>
+            <div class="element__like-conteiner">
             <button
               class="element__button-like element__button-like_active"
               type="button"
             ></button>
             <span class="element__like-count"></span>
+          </div>
           </div>
         </li>
       </ul>

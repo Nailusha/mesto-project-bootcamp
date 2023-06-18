@@ -20,11 +20,12 @@ const cardWindow = document.querySelector('.popup__card'); // окно созд�
 const profileWindow = document.querySelector('.popup__profile'); // окно профиля
 const avatarWindow = document.querySelector('.popup__avatar'); // окно аватарки
 
-const popupGlobal = document.querySelectorAll('.popup');
+export const popups = document.querySelectorAll('.popup');
 
 const buttonAvat = document.querySelector('.profile__avatar-button');
 const buttonEdit = document.querySelector('.profile__button-edit'); // кнопка редактирования профиля
 const buttonAdd = document.querySelector('.profile__button-add'); //кнопка создания карточек
+const buttonClose = document.querySelector('.popup__button-closed');
 
 const profileAvatar = document.querySelector('.profile__avatar');
 const inputAvatarSrc = document.querySelector('.form__input-avatar');
@@ -46,19 +47,19 @@ const container = document.querySelector('.elements__list');
 function handleFormSubmit(evt) {
   evt.preventDefault();
   evt.submitter.textContent = 'Сохранение...';
-  
+
   setUserInformation(inputProfileSubtitle.value, inputProfileTitle.value)
-  .then((res) => {
-    profileSubtitle.textContent = res.about;
-    profileTitle.textContent = res.name;
-    
+    .then((res) => {
+      profileSubtitle.textContent = res.about;
+      profileTitle.textContent = res.name;
 
-  closePopup(profileWindow);
-  })
 
-  .catch(e => console.log(e))
+      closePopup(profileWindow);
+    })
+
+    .catch(e => console.log(e))
     .finally(() => {
-        evt.submitter.textContent = 'Сохранить'
+      evt.submitter.textContent = 'Сохранить'
     })
 };
 
@@ -88,7 +89,7 @@ function handleNewCard(evt) {
     .catch(e => console.log(e))
 
     .finally(() => {
-        evt.submitter.textContent = 'Сохранить'
+      evt.submitter.textContent = 'Сохранить'
     })
 }
 
@@ -99,13 +100,13 @@ function handleFotoCard(evt) {
   evt.submitter.textContent = 'Сохранение...'
 
   setUserAvatar(inputAvatarSrc.value)
-  .then((res) => {
-    profileAvatar.src = res.avatar;
-    closePopup(avatarWindow);            
-})
-  .catch(e => console.log(e))
+    .then((res) => {
+      profileAvatar.src = res.avatar;
+      closePopup(avatarWindow);
+    })
+    .catch(e => console.log(e))
 
-  .finally(() => {
+    .finally(() => {
       evt.submitter.textContent = 'Сохранить'
     })
 }
@@ -127,10 +128,21 @@ Promise.all([getCards(), getUserInformation()])
   });
 
 
+function openProfileForm() {
+  openPopup(profileWindow);
+  inputProfileTitle.value = profileTitle.textContent;
+  inputProfileSubtitle.value = profileSubtitle.textContent;
+}
+
+function openAvatar() {
+  openPopup(avatarWindow);
+  inputAvatarSrc.value = profileAvatar.src;
+}
+
 // слушатели на открытие окон
-buttonEdit.addEventListener('click', () => openPopup(profileWindow));
+buttonEdit.addEventListener('click', openProfileForm);
 buttonAdd.addEventListener('click', () => openPopup(cardWindow));
-buttonAvat.addEventListener('click', () => openPopup(avatarWindow));
+buttonAvat.addEventListener('click', openAvatar);
 
 // слушатели нажатия на крестик
 document.querySelectorAll('.popup__button-closed').forEach(button => {

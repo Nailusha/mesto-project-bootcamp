@@ -20,7 +20,7 @@ const cardWindow = document.querySelector('.popup__card'); // окно созд�
 const profileWindow = document.querySelector('.popup__profile'); // окно профиля
 const avatarWindow = document.querySelector('.popup__avatar'); // окно аватарки
 
-export const popups = document.querySelectorAll('.popup');
+export const popupGlobal = document.querySelectorAll('.popup');
 
 const buttonAvat = document.querySelector('.profile__avatar-button');
 const buttonEdit = document.querySelector('.profile__button-edit'); // кнопка редактирования профиля

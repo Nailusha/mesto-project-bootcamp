@@ -1,12 +1,14 @@
 .form__input {
-    border: 0;
-    border-bottom: 1px solid rgba(0, 0, 0, .2);
-    padding-bottom: 8px;
-    padding-top: 7px;
-    margin: 0;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 17px;
+    display: inline-block;
+  padding: 0;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid rgba(0,0,0,.2);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap; 
+  font-size: 14px;
+  line-height: 17px;
 }
 .form__input:focus {
     outline-color: rgba(0, 0, 0);

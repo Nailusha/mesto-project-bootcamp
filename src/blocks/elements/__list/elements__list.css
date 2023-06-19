@@ -8,3 +8,8 @@
     margin: 0;
     padding: 0;
 }
+@media screen and (max-width: 980px) {
+    .elements__list {
+    justify-content: center;
+  }
+  }
